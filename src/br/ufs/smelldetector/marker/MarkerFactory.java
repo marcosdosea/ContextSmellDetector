@@ -28,9 +28,9 @@ import br.ufs.smelldetector.negocio.GerenciadorProjeto;
 public class MarkerFactory {
 
 	//Marker ID
-	public final static String ID_MARCADOR = "com.cleverton.longmethoddetector.mymarker";
+	public final static String ID_MARCADOR = "br.ufs.smelldetector.mymarker";
 	//Annotation ID
-	public static final String ID_ANNOTATION = "com.cleverton.longmethoddetector.myannotation";
+	public static final String ID_ANNOTATION = "br.ufs.smelldetector.myannotation";
 
 	public static IMarker criarMarcador(IResource resource, DadosMetodoLongo informacoes) 
 			throws CoreException {

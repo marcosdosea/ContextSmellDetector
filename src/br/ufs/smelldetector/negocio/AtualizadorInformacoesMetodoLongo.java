@@ -37,8 +37,9 @@ public class AtualizadorInformacoesMetodoLongo {
 				ValorMetodoLongoPreferencePage.OPCAOVALORLIMIAR)) {
 			ProviderModel.INSTANCE.dadosClasses = analisadorProjeto.getInfoMetodosPorProjetos(
 					Activator.projetos, false);
+			int valorLimiar = Integer.parseInt(store.getString(PreferenceConstants.VALOR_LIMIAR));
 			ProviderModel.INSTANCE.metodoslongos = filtrarMetodos.filtrarPorValorLimiar(
-					ProviderModel.INSTANCE.dadosClasses);
+					ProviderModel.INSTANCE.dadosClasses, valorLimiar);
 			System.out.println("Métodos longos valor limiar: " + 
 					ProviderModel.INSTANCE.metodoslongos.size() + " métodos encontrados.");
 		} else {

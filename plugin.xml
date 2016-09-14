@@ -5,7 +5,7 @@
    <extension
          point="org.eclipse.ui.views">
       <category
-            name="ContextLongMethod"
+            name="ContextSmellDetector"
             id="br.ufs.smelldetector">
       </category>
       <view

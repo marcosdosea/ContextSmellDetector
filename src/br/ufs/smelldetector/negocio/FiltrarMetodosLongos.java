@@ -3,21 +3,16 @@ package br.ufs.smelldetector.negocio;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import org.eclipse.jface.preference.IPreferenceStore;
-
-import br.ufs.smelldetector.Activator;
 import br.ufs.smelldetector.model.DadosClasse;
 import br.ufs.smelldetector.model.DadosComponentesArquiteturais;
 import br.ufs.smelldetector.model.DadosMetodo;
 import br.ufs.smelldetector.model.DadosMetodoLongo;
-import br.ufs.smelldetector.preferences.PreferenceConstants;
 
 public class FiltrarMetodosLongos {
 
 	public ArrayList<DadosMetodoLongo> filtrarPorValorLimiar(
-			ArrayList<DadosClasse> dadosClasse) {
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		int valorLimiar = Integer.parseInt(store.getString(PreferenceConstants.VALOR_LIMIAR));
+			ArrayList<DadosClasse> dadosClasse, int valorLimiar) {
+		//IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		ArrayList<DadosMetodoLongo> listaMetodosLongos = new ArrayList<>();
 		for (DadosClasse classe : dadosClasse) {
 			//System.out.println(classe.getNomeClasse() +"  --  "+classe.getMetodos().size());
