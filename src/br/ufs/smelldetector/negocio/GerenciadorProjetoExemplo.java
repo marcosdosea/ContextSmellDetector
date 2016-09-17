@@ -12,6 +12,8 @@ import br.ufs.smelldetector.model.ProviderModel;
 
 public class GerenciadorProjetoExemplo {
 
+	public static String componenteNaoClassificado = "Não Classificado";
+	
 	public int obterValorLimiarGlobal(String projetoExemplo, int porcentagemLimiar) {
 		List<DadosClasse> listaClasses = obterListaClassesProjetoExemplo(false, projetoExemplo);
 		ArrayList<Integer> listaNumLinhasOrdenada = MedianaQuartis.ordernarOrdemCrescente(
@@ -86,7 +88,7 @@ public class GerenciadorProjetoExemplo {
 		return retorno;
 	}
 	
-	private boolean grupoEhRegra3(List<DadosClasse> grupo) {
+	public boolean grupoEhRegra3(List<DadosClasse> grupo) {
 		if (grupo.size() > 1) {
 			if (temClasseImplementada(grupo.get(0)) && !implementaInterfaceDaArquitetura(grupo.get(0)) &&
 					implementaMesmaClasse(grupo.get(0), grupo.get(1))) {
@@ -96,7 +98,7 @@ public class GerenciadorProjetoExemplo {
 		return false;
 	}
 	
-	private boolean grupoEhRegra2(List<DadosClasse> grupo) {
+	public boolean grupoEhRegra2(List<DadosClasse> grupo) {
 		if (grupo.size() > 1) {
 			if (temClasseImplementada(grupo.get(0)) && implementaInterfaceDaArquitetura(grupo.get(0))
 					&& implementaMesmaClasse(grupo.get(0), grupo.get(1))) {
@@ -106,7 +108,7 @@ public class GerenciadorProjetoExemplo {
 		return false;
 	}
 
-	private boolean grupoEhRegra1(List<DadosClasse> grupo) {
+	public boolean grupoEhRegra1(List<DadosClasse> grupo) {
 		if (grupo.size() > 1) {
 			if (grupo.get(0).getClassesExtendsImplements().get(0) != null && 
 					extendMesmaClasse(grupo.get(0), grupo.get(1))) {
@@ -192,7 +194,7 @@ public class GerenciadorProjetoExemplo {
 		return false;
 	}
 
-	private boolean extendMesmaClasse(DadosClasse classe, DadosClasse grupo) {
+	public boolean extendMesmaClasse(DadosClasse classe, DadosClasse grupo) {
 		return classe.getClassesExtendsImplements().get(0).equals(
 				grupo.getClassesExtendsImplements().get(0));
 	}
@@ -253,7 +255,7 @@ public class GerenciadorProjetoExemplo {
 		if (componente.getImplementsArquitecture() != null) {
 			return componente.getImplementsArquitecture();
 		}
-		return "Não Classificado";
+		return componenteNaoClassificado;
 	}
 	
 }

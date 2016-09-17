@@ -7,7 +7,6 @@ public class DadosClasse {
 	private String diretorioDaClasse;
 	private String nomeClasse;
 	private ArrayList<String> classesExtendsImplements;
-	private int grupoArquitetural;
 	private ArrayList<DadosMetodo> metodos;
 	
 	public String getDiretorioDaClasse() {
@@ -32,14 +31,6 @@ public class DadosClasse {
 	
 	public void setClassesExtendsImplements(ArrayList<String> classesExtendsImplements) {
 		this.classesExtendsImplements = classesExtendsImplements;
-	}
-	
-	public int getGrupoArquitetural() {
-		return grupoArquitetural;
-	}
-	
-	public void setGrupoArquitetural(int grupoArquitetural) {
-		this.grupoArquitetural = grupoArquitetural;
 	}
 	
 	public ArrayList<DadosMetodo> getMetodos() {
