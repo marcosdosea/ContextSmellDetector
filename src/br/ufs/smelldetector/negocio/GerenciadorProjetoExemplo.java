@@ -186,12 +186,7 @@ public class GerenciadorProjetoExemplo {
 						implementaMesmaClasse(classe, grupo.get(0))) {
 					grupo.add(classe);
 					return true;
-				} /*else {
-					// Regra 4
-					if (classePossuiPrefixoSufixoIgual(classe, grupo)) {
-						// TODO: Falta implementar
-					}
-				}*/
+				} 
 			}
 		}
 		return false;
@@ -260,7 +255,5 @@ public class GerenciadorProjetoExemplo {
 		}
 		return "Não Classificado";
 	}
-	
-	
 	
 }

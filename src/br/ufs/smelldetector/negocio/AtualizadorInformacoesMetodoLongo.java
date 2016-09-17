@@ -109,26 +109,4 @@ public class AtualizadorInformacoesMetodoLongo {
 			}
 		}); 
 	} 
-
-	/*public static void refreshProjetc(String project) {
-		IProject projeto = ResourcesPlugin.getWorkspace().getRoot().getProject(
-				GerenciadorProjeto.nomeProjetoPorCaminho(project));
-		try {
-			projeto.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void refreshallProjects() {
-		for(String projeto : Activator.projetos){
-			try {
-				IProject iProject = ResourcesPlugin.getWorkspace().getRoot().getProject(
-						GerenciadorProjeto.nomeProjetoPorCaminho(projeto));
-				iProject.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
-		}
-	} */
 }
