@@ -18,10 +18,10 @@ public class GerenciadorProjetoExemploTest {
 	
 	/* Projeto de exemplo tem 3 classes que estende mesma classe, 2 que implementa interface da api 
 	 * e duas que não se encaixam em nenhuma regra. */
-	private String projetoExemplo = "C:/workspace/TestesProjetoExemplo";
-	private String projetoExemploGrupo1 = "C:/workspace/TestesProjetoExemplo/src/Grupo1";
-	private String projetoExemploGrupo3 = "C:/workspace/TestesProjetoExemplo/src/Grupo3";
-	private String projetoExemploGrupo4 = "C:/workspace/TestesProjetoExemplo/src/Grupo4";
+	private String projetoExemplo = "C:/Users/Kekeu/Documents/GitHub/ContextSmellDetector/TestesProjetoExemplo";
+	private String projetoExemploGrupo1 = "C:/Users/Kekeu/Documents/GitHub/ContextSmellDetector/TestesProjetoExemplo/src/Grupo1";
+	private String projetoExemploGrupo3 = "C:/Users/Kekeu/Documents/GitHub/ContextSmellDetector/TestesProjetoExemplo/src/Grupo3";
+	private String projetoExemploGrupo4 = "C:/Users/Kekeu/Documents/GitHub/ContextSmellDetector/TestesProjetoExemplo/src/Grupo4";
 	private final int porcentagemLimiar = 75; 
 
 	/* 
