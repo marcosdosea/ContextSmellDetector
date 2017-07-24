@@ -10,7 +10,7 @@ import br.ufs.smelldetector.model.DadosMetodoSmell;
 
 public class FiltrarMetodosSmell {
 
-	public ArrayList<DadosMetodoSmell> filtrarPorValorLimiar(
+	public ArrayList<DadosMetodoSmell> filtrarPorValorLimiarPreDefinido(
 			ArrayList<DadosClasse> dadosClasse, int valorLimiar) {
 		//IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		ArrayList<DadosMetodoSmell> listaMetodosSmell = new ArrayList<>();

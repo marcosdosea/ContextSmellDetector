@@ -44,7 +44,7 @@ public class FiltrarMetodosSmellTest {
 			getProjetosParaAnalise(), false);
 		
 		FiltrarMetodosSmell filtrarML = new FiltrarMetodosSmell();
-		ArrayList<DadosMetodoSmell> metodosLongos = filtrarML.filtrarPorValorLimiar(
+		ArrayList<DadosMetodoSmell> metodosLongos = filtrarML.filtrarPorValorLimiarPreDefinido(
 			classes, valorLimiar);
 		
 		exibeMetodosLongos(metodosLongos, "Filtrar por valor limiar");
@@ -52,7 +52,7 @@ public class FiltrarMetodosSmellTest {
 		assertTrue(metodosLongos.size() > 0);
 	}
 
-	//@Test
+	@Test
 	public void testFiltrarPorProjetoExemploGeral() {
 		AnalisadorProjeto analisadorProjeto = new AnalisadorProjeto();
 		ArrayList<DadosClasse> classes = analisadorProjeto.getInfoMetodosPorProjetos(
@@ -71,7 +71,7 @@ public class FiltrarMetodosSmellTest {
 		assertTrue(metodosLongos.size() > 0);
 	}
 
-	//@Test
+	@Test
 	public void testFiltrarPorProjetoExemploPreocupacaoArquitetural() {
 		AnalisadorProjeto analisadorProjeto = new AnalisadorProjeto();
 		ArrayList<DadosClasse> classes = analisadorProjeto.getInfoMetodosPorProjetos(
