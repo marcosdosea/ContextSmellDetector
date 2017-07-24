@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: LongMethodDetector
-Bundle-SymbolicName: ContextSmellDetector;singleton:=true
+Bundle-SymbolicName: ContextSmell;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: br.ufs.smelldetector.Activator
 Bundle-Vendor: CLEVERTON

@@ -8,7 +8,7 @@ public enum ProviderModel {
 	INSTANCE;
 	
 	public ArrayList<DadosClasse> dadosClasses;
-	public ArrayList<DadosMetodoLongo> metodoslongos;
+	public ArrayList<DadosMetodoSmell> metodoslongos;
 	private ArrayList<String> interfacesAPI;
 	public LinkedList<DadosComponentesArquiteturais> dadosComponentesArquiteturais;
 	public int valorLimiarGlobal;

@@ -9,14 +9,14 @@ import org.junit.Test;
 
 import br.ufs.smelldetector.model.DadosClasse;
 import br.ufs.smelldetector.model.DadosComponentesArquiteturais;
-import br.ufs.smelldetector.model.DadosMetodoLongo;
+import br.ufs.smelldetector.model.DadosMetodoSmell;
 
-public class FiltrarMetodosLongosTest {
+public class FiltrarMetodosSmellTest {
 
 	private final int porcentagem = 75;
 	private final int valorLimiar = 10;
 	
-	private String projetoExemplo = "C:/Users/Kekeu/Documents/mobilemedia/MobileMedia01_OO"; 
+	private String projetoExemplo = "D:/Projetos/mobilemedia/MobileMedia01_OO"; 
 	
 	private ArrayList<String> getProjetosParaAnalise() {
 		ArrayList<String> projetosParaAnalise = new ArrayList<String>();
@@ -24,15 +24,17 @@ public class FiltrarMetodosLongosTest {
 		return projetosParaAnalise;
 	}
 	
-	private void exibeMetodosLongos(ArrayList<DadosMetodoLongo> metodosLongos, 
+	private void exibeMetodosLongos(ArrayList<DadosMetodoSmell> metodosSmell, 
 			String descricaoMetodo) {
 		System.out.println("\n\n\n"+descricaoMetodo);
-		System.out.println("Classe   |     Método       |     Linhas Código");
-		for (DadosMetodoLongo metodoLongo: metodosLongos) {
-			System.out.println(metodoLongo.getNomeClasse() + "  | " + 
-					metodoLongo.getNomeMetodo() + " | " + metodoLongo.getNumeroLinhas() );
+		System.out.println("Classe   |     Método       |     Linhas Código     |  CC  | Efferent |  NOP");
+		for (DadosMetodoSmell metodoSmell: metodosSmell) {
+			System.out.println(metodoSmell.getNomeClasse() + "  | " + 
+					metodoSmell.getNomeMetodo() + " | " + metodoSmell.getLinesOfCode() + "|" + 
+					metodoSmell.getComplexity() + " | "  + metodoSmell.getEfferent()   + " | " +
+					metodoSmell.getNumberOfParameters());
 		}
-		System.out.println("Total de métodos longos: "+metodosLongos.size());
+		System.out.println("Total de métodos longos: "+metodosSmell.size());
 	}
 	
 	@Test
@@ -41,8 +43,8 @@ public class FiltrarMetodosLongosTest {
 		ArrayList<DadosClasse> classes = analisadorProjeto.getInfoMetodosPorProjetos(
 			getProjetosParaAnalise(), false);
 		
-		FiltrarMetodosLongos filtrarML = new FiltrarMetodosLongos();
-		ArrayList<DadosMetodoLongo> metodosLongos = filtrarML.filtrarPorValorLimiar(
+		FiltrarMetodosSmell filtrarML = new FiltrarMetodosSmell();
+		ArrayList<DadosMetodoSmell> metodosLongos = filtrarML.filtrarPorValorLimiar(
 			classes, valorLimiar);
 		
 		exibeMetodosLongos(metodosLongos, "Filtrar por valor limiar");
@@ -50,7 +52,7 @@ public class FiltrarMetodosLongosTest {
 		assertTrue(metodosLongos.size() > 0);
 	}
 
-	@Test
+	//@Test
 	public void testFiltrarPorProjetoExemploGeral() {
 		AnalisadorProjeto analisadorProjeto = new AnalisadorProjeto();
 		ArrayList<DadosClasse> classes = analisadorProjeto.getInfoMetodosPorProjetos(
@@ -60,8 +62,8 @@ public class FiltrarMetodosLongosTest {
 		int valorLimiarGlobal = gpe.obterValorLimiarGlobal(projetoExemplo, porcentagem);
 		int medianaGlobal = gpe.obterMedianaGlobal(projetoExemplo, porcentagem);
 		
-		FiltrarMetodosLongos filtrarML = new FiltrarMetodosLongos();
-		ArrayList<DadosMetodoLongo> metodosLongos = filtrarML.filtrarPorProjetoExemploGeral(
+		FiltrarMetodosSmell filtrarML = new FiltrarMetodosSmell();
+		ArrayList<DadosMetodoSmell> metodosLongos = filtrarML.filtrarPorProjetoExemploGeral(
 				classes, valorLimiarGlobal, medianaGlobal);
 		
 		exibeMetodosLongos(metodosLongos, "Filtrar Por Projeto Exemplo Geral");
@@ -69,7 +71,7 @@ public class FiltrarMetodosLongosTest {
 		assertTrue(metodosLongos.size() > 0);
 	}
 
-	@Test
+	//@Test
 	public void testFiltrarPorProjetoExemploPreocupacaoArquitetural() {
 		AnalisadorProjeto analisadorProjeto = new AnalisadorProjeto();
 		ArrayList<DadosClasse> classes = analisadorProjeto.getInfoMetodosPorProjetos(
@@ -79,8 +81,8 @@ public class FiltrarMetodosLongosTest {
 		LinkedList<DadosComponentesArquiteturais> dadosCA = gpe.
 			criarTabelaCompArquiteturais(projetoExemplo, porcentagem);
 		
-		FiltrarMetodosLongos filtrarML = new FiltrarMetodosLongos();
-		ArrayList<DadosMetodoLongo> metodosLongos = filtrarML.
+		FiltrarMetodosSmell filtrarML = new FiltrarMetodosSmell();
+		ArrayList<DadosMetodoSmell> metodosLongos = filtrarML.
 				filtrarPorProjetoExemploPreocupacaoArquitetural(classes, dadosCA);
 		
 		exibeMetodosLongos(metodosLongos, "Filtrar por projeto exemplo preocupação arquitetural");

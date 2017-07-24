@@ -1,12 +1,15 @@
 package br.ufs.smelldetector.model;
 
-public class DadosMetodoLongo {
+public class DadosMetodoSmell {
 	
 	private String diretorioDaClasse;
 	private String nomeClasse;
 	private String nomeMetodo;
 	private int linhaInicial;
-	private int numeroLinhas;
+	private int linesOfCode;
+	private int complexity;
+	private int numberOfParameters;
+	private int efferent;
 	private int charInicial;
 	private int charFinal;
 	private String mensagem;
@@ -60,12 +63,12 @@ public class DadosMetodoLongo {
 		this.linhaInicial = linhaInicial;
 	}
 	
-	public int getNumeroLinhas() {
-		return numeroLinhas;
+	public int getLinesOfCode() {
+		return linesOfCode;
 	}
 	
-	public void setNumeroLinhas(int numeroLinhas) {
-		this.numeroLinhas = numeroLinhas;
+	public void setLinesOfCode(int numeroLinhas) {
+		this.linesOfCode = numeroLinhas;
 	}
 	
 	public int getCharInicial() {
@@ -83,5 +86,30 @@ public class DadosMetodoLongo {
 	public void setCharFinal(int charFinal) {
 		this.charFinal = charFinal;
 	}
+
+	public int getComplexity() {
+		return complexity;
+	}
+
+	public void setComplexity(int complexity) {
+		this.complexity = complexity;
+	}
+
+	public int getNumberOfParameters() {
+		return numberOfParameters;
+	}
+
+	public void setNumberOfParameters(int numberOfParameters) {
+		this.numberOfParameters = numberOfParameters;
+	}
+
+	public int getEfferent() {
+		return efferent;
+	}
+
+	public void setEfferent(int efferent) {
+		this.efferent = efferent;
+	}
+	
 	
 }

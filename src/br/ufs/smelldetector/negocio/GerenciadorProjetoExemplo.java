@@ -82,7 +82,7 @@ public class GerenciadorProjetoExemplo {
 		ArrayList<Integer> retorno = new ArrayList<>();
 		for (DadosClasse dadosClasse : grupo) {
 			for (DadosMetodo metodo : dadosClasse.getMetodos()) {
-				retorno.add(metodo.getNumeroLinhas());
+				retorno.add(metodo.getLinesOfCode());
 			}
 		}
 		return retorno;

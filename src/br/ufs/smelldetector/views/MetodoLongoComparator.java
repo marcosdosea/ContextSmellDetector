@@ -4,7 +4,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.swt.SWT;
 
-import br.ufs.smelldetector.model.DadosMetodoLongo;
+import br.ufs.smelldetector.model.DadosMetodoSmell;
 
 public class MetodoLongoComparator extends ViewerComparator {
 	private int propertyIndex;
@@ -33,8 +33,8 @@ public class MetodoLongoComparator extends ViewerComparator {
 
 	@Override
 	public int compare(Viewer viewer, Object e1, Object e2) {
-		DadosMetodoLongo p1 = (DadosMetodoLongo) e1;
-		DadosMetodoLongo p2 = (DadosMetodoLongo) e2;
+		DadosMetodoSmell p1 = (DadosMetodoSmell) e1;
+		DadosMetodoSmell p2 = (DadosMetodoSmell) e2;
 		int rc = 0;
 		switch (propertyIndex) {
 		case 0:
@@ -53,7 +53,7 @@ public class MetodoLongoComparator extends ViewerComparator {
 				rc = -1;
 			break;
 		case 4:
-			if (p1.getNumeroLinhas() >= p2.getNumeroLinhas()) {
+			if (p1.getLinesOfCode() >= p2.getLinesOfCode()) {
 				rc = 1;
 			} else
 				rc = -1;

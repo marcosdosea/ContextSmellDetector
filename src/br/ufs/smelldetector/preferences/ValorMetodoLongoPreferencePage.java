@@ -62,7 +62,7 @@ implements IWorkbenchPreferencePage {
 				"&Choose the approach to code review: ", 1, opcoesProjetoRG, getFieldEditorParent(), true);
 		
 		projetoExemploDirectory = new DirectoryFieldEditor(PreferenceConstants.PROJETO_EXEMPLO, 
-				"&Sample Project Folder:  ", getFieldEditorParent());
+				"&Reference Project :  ", getFieldEditorParent());
 
 		porcentagemProjetoExemploField = new IntegerFieldEditor(PreferenceConstants
 				.PORCENTAGEM_PROJETO_EXEMPLO, "&Percentile considered to Extract  Threshold Values: ", 

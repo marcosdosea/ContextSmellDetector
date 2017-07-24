@@ -8,6 +8,12 @@ import br.ufs.smelldetector.model.DadosClasse;
 
 public class AnalisadorProjeto {
 
+	/**
+	 * Busca todas as classes do projeto e faz o cálculo das métricas de cada classe.
+	 * @param projetos
+	 * @param AdicionarArquitetura
+	 * @return
+	 */
 	public ArrayList<DadosClasse> getInfoMetodosPorProjetos(
 			ArrayList<String> projetos, boolean AdicionarArquitetura) {
 		ArrayList<DadosClasse> dadosTodasClasses = null;
@@ -30,6 +36,11 @@ public class AnalisadorProjeto {
 		return dadosTodasClasses;
 	}
 
+	/**
+	 * Busca todos os arquivos com extensão JAVA
+	 * @param nomeDiretorio onde as classes serão buscadas.
+	 * @return
+	 */
 	public ArrayList<String> getArquivosPorProjeto(String nomeDiretorio){
 		//System.out.println();
 		//System.out.println();

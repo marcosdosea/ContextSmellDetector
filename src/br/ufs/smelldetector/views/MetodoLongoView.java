@@ -28,7 +28,7 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ViewPart;
 
 import br.ufs.smelldetector.marker.MarkerFactory;
-import br.ufs.smelldetector.model.DadosMetodoLongo;
+import br.ufs.smelldetector.model.DadosMetodoSmell;
 import br.ufs.smelldetector.model.ProviderModel;
 
 public class MetodoLongoView extends ViewPart {
@@ -61,7 +61,7 @@ public class MetodoLongoView extends ViewPart {
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
 				IStructuredSelection selection = (IStructuredSelection)event.getSelection();
-				DadosMetodoLongo linha = (DadosMetodoLongo) selection.getFirstElement();
+				DadosMetodoSmell linha = (DadosMetodoSmell) selection.getFirstElement();
 				String localWorkspace = MarkerFactory.alterarDireotioAbsolutoPorWorkspace(
 						linha.getDiretorioDaClasse());
 				IFile file = ResourcesPlugin.getWorkspace().getRoot()
@@ -125,7 +125,7 @@ public class MetodoLongoView extends ViewPart {
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				DadosMetodoLongo p = (DadosMetodoLongo) element;
+				DadosMetodoSmell p = (DadosMetodoSmell) element;
 				return p.getDiretorioDaClasse();
 			}
 		});
@@ -134,7 +134,7 @@ public class MetodoLongoView extends ViewPart {
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				DadosMetodoLongo p = (DadosMetodoLongo) element;
+				DadosMetodoSmell p = (DadosMetodoSmell) element;
 				return p.getNomeClasse();
 			}
 		});
@@ -143,7 +143,7 @@ public class MetodoLongoView extends ViewPart {
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				DadosMetodoLongo p = (DadosMetodoLongo) element;
+				DadosMetodoSmell p = (DadosMetodoSmell) element;
 				return p.getNomeMetodo();
 			}
 		});
@@ -152,7 +152,7 @@ public class MetodoLongoView extends ViewPart {
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				DadosMetodoLongo p = (DadosMetodoLongo) element;
+				DadosMetodoSmell p = (DadosMetodoSmell) element;
 				return p.getLinhaInicial()+"";
 			}
 		});
@@ -161,8 +161,8 @@ public class MetodoLongoView extends ViewPart {
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				DadosMetodoLongo p = (DadosMetodoLongo) element;
-				return p.getNumeroLinhas()+"";
+				DadosMetodoSmell p = (DadosMetodoSmell) element;
+				return p.getLinesOfCode()+"";
 			}
 		});
 		
@@ -170,7 +170,7 @@ public class MetodoLongoView extends ViewPart {
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				DadosMetodoLongo p = (DadosMetodoLongo) element;
+				DadosMetodoSmell p = (DadosMetodoSmell) element;
 				return p.getType();
 			}
 		});

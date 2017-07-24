@@ -10,7 +10,7 @@ import org.eclipse.ui.PlatformUI;
 
 import br.ufs.smelldetector.Activator;
 import br.ufs.smelldetector.marker.MarkerFactory;
-import br.ufs.smelldetector.model.DadosMetodoLongo;
+import br.ufs.smelldetector.model.DadosMetodoSmell;
 import br.ufs.smelldetector.model.ProviderModel;
 import br.ufs.smelldetector.preferences.PreferenceConstants;
 import br.ufs.smelldetector.preferences.ValorMetodoLongoPreferencePage;
@@ -32,7 +32,7 @@ public class AtualizadorInformacoesMetodoLongo {
 
 	private static void atulizarDadosProviderModel(AnalisadorProjeto analisadorProjeto) {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		FiltrarMetodosLongos filtrarMetodos = new FiltrarMetodosLongos();
+		FiltrarMetodosSmell filtrarMetodos = new FiltrarMetodosSmell();
 		if (store.getString(PreferenceConstants.USAR_P_EXEMPLO_V_LIMIAR).equals(
 				ValorMetodoLongoPreferencePage.OPCAOVALORLIMIAR)) {
 			ProviderModel.INSTANCE.dadosClasses = analisadorProjeto.getInfoMetodosPorProjetos(
@@ -84,7 +84,7 @@ public class AtualizadorInformacoesMetodoLongo {
 		}
 	}
 
-	public static void refreshMarcadores(ArrayList<DadosMetodoLongo> metodosLongos) {
+	public static void refreshMarcadores(ArrayList<DadosMetodoSmell> metodosLongos) {
 		MarkerFactory marcador = new MarkerFactory();
 		marcador.deleteTodosMarcadores();
 		marcador.adicionarMarcadoresMetodosLongos(metodosLongos);
