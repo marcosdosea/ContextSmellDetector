@@ -59,6 +59,24 @@ public class MetodoLongoComparator extends ViewerComparator {
 				rc = -1;
 			break;
 		case 5:
+			if (p1.getComplexity() >= p2.getComplexity()) {
+				rc = 1;
+			} else
+				rc = -1;
+			break;
+		case 6:
+			if (p1.getEfferent() >= p2.getEfferent()) {
+				rc = 1;
+			} else
+				rc = -1;
+			break;
+		case 7:
+			if (p1.getNumberOfParameters() >= p2.getNumberOfParameters() ) {
+				rc = 1;
+			} else
+				rc = -1;
+			break;
+		case 8:
 			rc = p1.getType().compareTo(p2.getType());
 			break;
 		default:

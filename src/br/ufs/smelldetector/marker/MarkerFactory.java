@@ -27,18 +27,17 @@ import br.ufs.smelldetector.negocio.GerenciadorProjeto;
 
 public class MarkerFactory {
 
-	//Marker ID
+	// Marker ID
 	public final static String ID_MARCADOR = "br.ufs.smelldetector.mymarker";
-	//Annotation ID
+	// Annotation ID
 	public static final String ID_ANNOTATION = "br.ufs.smelldetector.myannotation";
 
-	public static IMarker criarMarcador(IResource resource, DadosMetodoSmell informacoes) 
-			throws CoreException {
+	public static IMarker criarMarcador(IResource resource, DadosMetodoSmell informacoes) throws CoreException {
 		IMarker marker = null;
-		//note: you use the id that is defined in your plugin.xml
+		// note: you use the id that is defined in your plugin.xml
 		marker = resource.createMarker(ID_MARCADOR);
 		marker.setAttribute(IMarker.MESSAGE, informacoes.getMensagem());
-		//compute and set char start and char end
+		// compute and set char start and char end
 		marker.setAttribute(IMarker.CHAR_START, informacoes.getCharInicial());
 		marker.setAttribute(IMarker.CHAR_END, informacoes.getCharFinal());
 		return marker;
@@ -47,8 +46,7 @@ public class MarkerFactory {
 	public static IMarker marcadorOpenEditor(IFile file, int linha) throws CoreException {
 		IMarker marker = file.createMarker(IMarker.LINE_NUMBER);
 		marker.setAttribute(IMarker.LINE_NUMBER, linha);
-		marker.setAttribute(IWorkbenchPage.CHANGE_EDITOR_AREA_SHOW, 
-				"org.eclipse.ui.DefaultTextEditor");
+		marker.setAttribute(IWorkbenchPage.CHANGE_EDITOR_AREA_SHOW, "org.eclipse.ui.DefaultTextEditor");
 		return marker;
 	}
 
@@ -64,9 +62,10 @@ public class MarkerFactory {
 	}
 
 	/*
-	 * Returns a list of markers that are linked to the resource or any sub resource of the resource
+	 * Returns a list of markers that are linked to the resource or any sub resource
+	 * of the resource
 	 */
-	public static List<IMarker> findAllMarkers(IResource  resource) {
+	public static List<IMarker> findAllMarkers(IResource resource) {
 		try {
 			return Arrays.asList(resource.findMarkers(ID_MARCADOR, true, IResource.DEPTH_INFINITE));
 		} catch (CoreException e) {
@@ -86,11 +85,10 @@ public class MarkerFactory {
 						for (DadosMetodoSmell metodoLongo : metodosLongos) {
 							String localWorkspace = alterarDireotioAbsolutoPorWorkspace(
 									metodoLongo.getDiretorioDaClasse());
-							IFile file = ResourcesPlugin.getWorkspace().getRoot()
-									.getFile(new Path(localWorkspace));
+							IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(localWorkspace));
 							try {
 								if (editor == null) {
-									editor = (ITextEditor)IDE.openEditor(page, file);
+									editor = (ITextEditor) IDE.openEditor(page, file);
 								}
 								IMarker marker = null;
 								marker = criarMarcador(file, metodoLongo);
@@ -115,9 +113,8 @@ public class MarkerFactory {
 
 	public void deleteMarcadorPorProjeto(String projeto) {
 		try {
-			ResourcesPlugin.getWorkspace().getRoot().getProject(
-					GerenciadorProjeto.nomeProjetoPorCaminho(projeto)).
-			deleteMarkers(ID_MARCADOR, true, IResource.DEPTH_INFINITE);
+			ResourcesPlugin.getWorkspace().getRoot().getProject(GerenciadorProjeto.nomeProjetoPorCaminho(projeto))
+					.deleteMarkers(ID_MARCADOR, true, IResource.DEPTH_INFINITE);
 		} catch (CoreException e) {
 			System.out.println("Problemas no delete marcador");
 			e.printStackTrace();
@@ -141,17 +138,21 @@ public class MarkerFactory {
 	}
 
 	public static void adicionarAnnotation(IMarker marker, DadosMetodoSmell metodo, ITextEditor editor) {
-		//The DocumentProvider enables to get the document currently loaded in the editor
+		// The DocumentProvider enables to get the document currently loaded in the
+		// editor
 		IDocumentProvider idp = editor.getDocumentProvider();
-		//This is the document we want to connect to. This is taken from the current editor input.
+		// This is the document we want to connect to. This is taken from the current
+		// editor input.
 		IDocument document = idp.getDocument(editor.getEditorInput());
-		//The IannotationModel enables to add/remove/change annoatation to a Document loaded in an Editor
+		// The IannotationModel enables to add/remove/change annoatation to a Document
+		// loaded in an Editor
 		IAnnotationModel iamf = idp.getAnnotationModel(editor.getEditorInput());
-		//Note: The annotation type id specify that you want to create one of your annotations
+		// Note: The annotation type id specify that you want to create one of your
+		// annotations
 		SimpleMarkerAnnotation ma = new SimpleMarkerAnnotation(ID_ANNOTATION, marker);
-		//Finally add the new annotation to the model
+		// Finally add the new annotation to the model
 		iamf.connect(document);
-		iamf.addAnnotation(ma,new Position(metodo.getCharInicial(), metodo.getCharFinal()));
+		iamf.addAnnotation(ma, new Position(metodo.getCharInicial(), metodo.getCharFinal()));
 		iamf.disconnect(document);
 	}
 

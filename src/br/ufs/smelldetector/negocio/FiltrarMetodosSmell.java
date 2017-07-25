@@ -71,7 +71,7 @@ public class FiltrarMetodosSmell {
 	
 	public ArrayList<DadosMetodoSmell> filtrarPorProjetoExemploPreocupacaoArquitetural(
 			ArrayList<DadosClasse> dadosClasse, LinkedList<DadosComponentesArquiteturais> dca) {
-		GerenciadorProjetoExemplo gca = new GerenciadorProjetoExemplo();
+		GerenciadorLimiares gca = new GerenciadorLimiares();
 		ArrayList<DadosMetodoSmell> listaMetodosSmell = new ArrayList<>();
 		for (DadosClasse classe : dadosClasse) {
 			boolean analisarProximaRegra = true;

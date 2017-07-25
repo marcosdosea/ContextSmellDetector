@@ -43,7 +43,7 @@ public class AtualizadorInformacoesMetodoLongo {
 			System.out.println("Métodos longos valor limiar: " + 
 					ProviderModel.INSTANCE.metodoslongos.size() + " métodos encontrados.");
 		} else {
-			GerenciadorProjetoExemplo gpe = new GerenciadorProjetoExemplo();
+			GerenciadorLimiares gpe = new GerenciadorLimiares();
 			if (store.getString(PreferenceConstants.USAR_P_EXEMPLO_V_LIMIAR).equals(
 					ValorMetodoLongoPreferencePage.OPCAOPROJETOEXEMPLO)) {
 				if (store.getBoolean(PreferenceConstants.USAR_PREOCUPACAO_ARQUITETURAL)) {

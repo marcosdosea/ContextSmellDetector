@@ -118,8 +118,8 @@ public class MetodoLongoView extends ViewPart {
 
 	// create the columns for the table
 	private void createColumns(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "Directory", "Class", "Method", "Initial Line", "Nº of Lines", "Type"};
-		int[] bounds = { 200, 200, 200, 100, 100, 100 };
+		String[] titles = { "Directory", "Class", "Method", "Initial Line", "LOC", "CC", "Efferent", "NOP", "Type"};
+		int[] bounds = { 200, 200, 200, 50, 50, 50, 50, 50, 100 };
 
 		TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
@@ -167,6 +167,35 @@ public class MetodoLongoView extends ViewPart {
 		});
 		
 		col = createTableViewerColumn(titles[5], bounds[5], 5);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				DadosMetodoSmell p = (DadosMetodoSmell) element;
+				return p.getComplexity() +"";
+			}
+		});
+		
+		col = createTableViewerColumn(titles[6], bounds[6], 6);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				DadosMetodoSmell p = (DadosMetodoSmell) element;
+				return p.getEfferent() + "";
+			}
+		});
+		
+		col = createTableViewerColumn(titles[7], bounds[7], 7);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				DadosMetodoSmell p = (DadosMetodoSmell) element;
+				return p.getNumberOfParameters() + "";
+			}
+		});
+		
+		
+		
+		col = createTableViewerColumn(titles[8], bounds[8], 8);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {

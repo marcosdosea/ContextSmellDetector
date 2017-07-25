@@ -14,7 +14,7 @@ import br.ufs.smelldetector.model.DadosComponentesArquiteturais;
 
 public class GerenciadorProjetoExemploTest {
 
-	private GerenciadorProjetoExemplo gpe = new GerenciadorProjetoExemplo();
+	private GerenciadorLimiares gpe = new GerenciadorLimiares();
 	
 	/* Projeto de exemplo tem 3 classes que estende mesma classe, 2 que implementa interface da api 
 	 * e duas que não se encaixam em nenhuma regra. */
@@ -37,20 +37,20 @@ public class GerenciadorProjetoExemploTest {
 		imprimeTabela(tabela);
 		assertEquals(tabela.size(), 3);
 		
-		assertTrue(GerenciadorProjetoExemplo.getClasseComponente(tabela.get(0)).equals("AbstractDocument") ||
-				GerenciadorProjetoExemplo.getClasseComponente(tabela.get(0)).equals("Serializable") || 
-				GerenciadorProjetoExemplo.getClasseComponente(tabela.get(0)).equals(
-						GerenciadorProjetoExemplo.componenteNaoClassificado));
+		assertTrue(GerenciadorLimiares.getClasseComponente(tabela.get(0)).equals("AbstractDocument") ||
+				GerenciadorLimiares.getClasseComponente(tabela.get(0)).equals("Serializable") || 
+				GerenciadorLimiares.getClasseComponente(tabela.get(0)).equals(
+						GerenciadorLimiares.componenteNaoClassificado));
 		
-		assertTrue(GerenciadorProjetoExemplo.getClasseComponente(tabela.get(1)).equals("AbstractDocument") ||
-				GerenciadorProjetoExemplo.getClasseComponente(tabela.get(1)).equals("Serializable") || 
-				GerenciadorProjetoExemplo.getClasseComponente(tabela.get(1)).equals(
-						GerenciadorProjetoExemplo.componenteNaoClassificado));
+		assertTrue(GerenciadorLimiares.getClasseComponente(tabela.get(1)).equals("AbstractDocument") ||
+				GerenciadorLimiares.getClasseComponente(tabela.get(1)).equals("Serializable") || 
+				GerenciadorLimiares.getClasseComponente(tabela.get(1)).equals(
+						GerenciadorLimiares.componenteNaoClassificado));
 		
-		assertTrue(GerenciadorProjetoExemplo.getClasseComponente(tabela.get(2)).equals("AbstractDocument") ||
-				GerenciadorProjetoExemplo.getClasseComponente(tabela.get(2)).equals("Serializable") || 
-				GerenciadorProjetoExemplo.getClasseComponente(tabela.get(2)).equals(
-						GerenciadorProjetoExemplo.componenteNaoClassificado));
+		assertTrue(GerenciadorLimiares.getClasseComponente(tabela.get(2)).equals("AbstractDocument") ||
+				GerenciadorLimiares.getClasseComponente(tabela.get(2)).equals("Serializable") || 
+				GerenciadorLimiares.getClasseComponente(tabela.get(2)).equals(
+						GerenciadorLimiares.componenteNaoClassificado));
 	}
 
 	@Test

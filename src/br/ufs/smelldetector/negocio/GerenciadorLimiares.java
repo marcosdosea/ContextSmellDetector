@@ -10,7 +10,7 @@ import br.ufs.smelldetector.model.DadosComponentesArquiteturais;
 import br.ufs.smelldetector.model.DadosMetodo;
 import br.ufs.smelldetector.model.ProviderModel;
 
-public class GerenciadorProjetoExemplo {
+public class GerenciadorLimiares {
 
 	public static String componenteNaoClassificado = "Não Classificado";
 	

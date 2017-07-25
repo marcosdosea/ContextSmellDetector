@@ -58,7 +58,7 @@ public class FiltrarMetodosSmellTest {
 		ArrayList<DadosClasse> classes = analisadorProjeto.getInfoMetodosPorProjetos(
 			getProjetosParaAnalise(), false);
 		
-		GerenciadorProjetoExemplo gpe = new GerenciadorProjetoExemplo();
+		GerenciadorLimiares gpe = new GerenciadorLimiares();
 		int valorLimiarGlobal = gpe.obterValorLimiarGlobal(projetoExemplo, porcentagem);
 		int medianaGlobal = gpe.obterMedianaGlobal(projetoExemplo, porcentagem);
 		
@@ -77,7 +77,7 @@ public class FiltrarMetodosSmellTest {
 		ArrayList<DadosClasse> classes = analisadorProjeto.getInfoMetodosPorProjetos(
 			getProjetosParaAnalise(), true);
 		
-		GerenciadorProjetoExemplo gpe = new GerenciadorProjetoExemplo();
+		GerenciadorLimiares gpe = new GerenciadorLimiares();
 		LinkedList<DadosComponentesArquiteturais> dadosCA = gpe.
 			criarTabelaCompArquiteturais(projetoExemplo, porcentagem);
 		
