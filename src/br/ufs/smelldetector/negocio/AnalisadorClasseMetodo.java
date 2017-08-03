@@ -12,8 +12,6 @@ import java.util.Set;
 import java.util.Stack;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.jdt.core.dom.AST;
-import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.CatchClause;
 import org.eclipse.jdt.core.dom.ClassInstanceCreation;
@@ -38,7 +36,6 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 
-import br.ufs.smelldetector.model.DadosClasse;
 import br.ufs.smelldetector.model.DadosMetodo;
 
 /**
@@ -48,45 +45,45 @@ import br.ufs.smelldetector.model.DadosMetodo;
  */
 public class AnalisadorClasseMetodo {
 
-	public ArrayList<DadosClasse> getInfoMetodosDosArquivos(
-			ArrayList<String> files, boolean adicionarArquitetura) throws IOException {
-		ArrayList<DadosClasse> dadosClasses = new ArrayList<>();
-		for (String localFile : files) {
-			String textoDaClasse = readFileToString(localFile);
-			ASTParser parser = ASTParser.newParser(AST.JLS8);
-			parser.setSource(textoDaClasse.toCharArray());
-			parser.setKind(ASTParser.K_COMPILATION_UNIT);
-			final CompilationUnit cu = (CompilationUnit) parser.createAST(null);
-
-			cu.accept(new ASTVisitor() {
-				@Override
-				public boolean visit(TypeDeclaration node) {
-					DadosClasse classe = new DadosClasse();
-					ArrayList<String> listaClassesEI = null;
-					if (adicionarArquitetura) {
-						listaClassesEI = obterListaClassesEI(node);	
-					}
-					String nomeDaClasse = node.getName().toString();
-					MethodDeclaration[] methodDeclaration = node.getMethods();
-					ArrayList<DadosMetodo> metodosDaClasse = new ArrayList<>();
-					for (int i = 0; i < methodDeclaration.length; i++) {
-						if (!methodDeclaration[i].isConstructor()) {
-							metodosDaClasse.add(obterInfoMetodo(cu, methodDeclaration[i]));
-						}
-					}
-					classe.setClassesExtendsImplements(listaClassesEI);
-					classe.setDiretorioDaClasse(localFile);
-					classe.setMetodos(metodosDaClasse);
-					classe.setNomeClasse(nomeDaClasse);
-					dadosClasses.add(classe);
-					//System.out.println(nomeDaClasse +"  --  "+metodosDaClasse.size());
-					//System.out.println();
-					return true;
-				}
-			});
-		}
-		return dadosClasses;
-	}
+//	public ArrayList<CKNumber> getInfoMetodosDosArquivos(
+//			ArrayList<String> files, boolean adicionarArquitetura) throws IOException {
+//		ArrayList<CKNumber> dadosClasses = new ArrayList<>();
+//		for (String localFile : files) {
+//			String textoDaClasse = readFileToString(localFile);
+//			ASTParser parser = ASTParser.newParser(AST.JLS8);
+//			parser.setSource(textoDaClasse.toCharArray());
+//			parser.setKind(ASTParser.K_COMPILATION_UNIT);
+//			final CompilationUnit cu = (CompilationUnit) parser.createAST(null);
+//
+//			cu.accept(new ASTVisitor() {
+//				@Override
+//				public boolean visit(TypeDeclaration node) {
+//					DadosClasse classe = new DadosClasse();
+//					ArrayList<String> listaClassesEI = null;
+//					if (adicionarArquitetura) {
+//						listaClassesEI = obterListaClassesEI(node);	
+//					}
+//					String nomeDaClasse = node.getName().toString();
+//					MethodDeclaration[] methodDeclaration = node.getMethods();
+//					ArrayList<DadosMetodo> metodosDaClasse = new ArrayList<>();
+//					for (int i = 0; i < methodDeclaration.length; i++) {
+//						if (!methodDeclaration[i].isConstructor()) {
+//							metodosDaClasse.add(obterInfoMetodo(cu, methodDeclaration[i]));
+//						}
+//					}
+//					classe.setClassesExtendsImplements(listaClassesEI);
+//					classe.setDiretorioDaClasse(localFile);
+//					classe.setMetodos(metodosDaClasse);
+//					classe.setNomeClasse(nomeDaClasse);
+//					dadosClasses.add(classe);
+//					//System.out.println(nomeDaClasse +"  --  "+metodosDaClasse.size());
+//					//System.out.println();
+//					return true;
+//				}
+//			});
+//		}
+//		return dadosClasses;
+//	}
 
 	//read file content into a string
 	public String readFileToString(String filePath) throws IOException {
@@ -139,34 +136,45 @@ public class AnalisadorClasseMetodo {
 	}
 
 	private DadosMetodo obterInfoMetodo(final CompilationUnit cu, MethodDeclaration metodo) {
-		DadosMetodo informacoesMetodo = new DadosMetodo();
-		informacoesMetodo.setLinhaInicial(cu.getLineNumber(
-				metodo.getName().getStartPosition()));
-		informacoesMetodo.setLinesOfCode(contarNumeroDeLinhas(metodo));
-		informacoesMetodo.setNumberOfParameters(metodo.parameters().size());
-	
-		cu.accept(new VisitMethod(informacoesMetodo, metodo));
+		VisitMethod visitMethod = new VisitMethod(cu, metodo);
 		
 		
-		informacoesMetodo.setNomeMetodo(metodo.getName().toString());
-		informacoesMetodo.setCharInicial(metodo.getStartPosition());
-		informacoesMetodo.setCharFinal(metodo.getLength()+
-				metodo.getStartPosition());
-		return informacoesMetodo;
+		return visitMethod.getDadosMetodo();
 	}
 	
-	private final class VisitMethod extends ASTVisitor {
-		private final DadosMetodo informacoesMetodo;
-		private final MethodDeclaration metodo;
+	private class VisitMethod extends ASTVisitor {
+		DadosMetodo informacoesMetodo;
+		MethodDeclaration metodo;
 		Map<String, String> declaredTypes = new HashMap<>();
 		Set<String> usedTypes = new HashSet<String>();
 		Stack<DadosMetodo> methodStack = new Stack<DadosMetodo>();
-		String currentMethod;
+		//String currentMethod;
+		CompilationUnit cu;
 
-		private VisitMethod(DadosMetodo informacoesMetodo, MethodDeclaration metodo) {
-			this.informacoesMetodo = informacoesMetodo;
+		private VisitMethod(final CompilationUnit cu, MethodDeclaration metodo) {
+			this.informacoesMetodo = new DadosMetodo();
 			this.metodo = metodo;
-			currentMethod = metodo.getName().getIdentifier();
+			this.cu = cu;
+			
+			//currentMethod = metodo.getName().getIdentifier();
+		}
+		
+		public DadosMetodo getDadosMetodo() {
+			informacoesMetodo.setLinhaInicial(cu.getLineNumber(
+					metodo.getName().getStartPosition()));
+			informacoesMetodo.setLinesOfCode(contarNumeroDeLinhas(metodo));
+			informacoesMetodo.setNumberOfParameters(metodo.parameters().size());
+		
+			cu.accept(this);
+			
+			informacoesMetodo.setNomeMetodo(metodo.getName().toString());
+			informacoesMetodo.setLinhaInicial(cu.getLineNumber(
+					metodo.getName().getStartPosition()));
+			informacoesMetodo.setCharInicial(metodo.getStartPosition());
+			informacoesMetodo.setCharFinal(metodo.getLength()+
+					metodo.getStartPosition());
+		
+			return informacoesMetodo;
 		}
 
 		public boolean visit(MethodDeclaration node) {  	
@@ -312,7 +320,7 @@ public class AnalisadorClasseMetodo {
 
 		@Override
 		public boolean visit(Initializer node) {
-			currentMethod = "(static_block)";
+			//currentMethod = "(static_block)";
 		
 			methodStack.push(informacoesMetodo);
 			increaseCc();

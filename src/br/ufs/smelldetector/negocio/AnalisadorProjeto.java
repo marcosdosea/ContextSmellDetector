@@ -1,10 +1,11 @@
 package br.ufs.smelldetector.negocio;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import br.ufs.smelldetector.model.DadosClasse;
+import com.github.mauricioaniche.ck.CK;
+import com.github.mauricioaniche.ck.CKNumber;
+import com.github.mauricioaniche.ck.CKReport;
 
 public class AnalisadorProjeto {
 
@@ -14,26 +15,35 @@ public class AnalisadorProjeto {
 	 * @param AdicionarArquitetura
 	 * @return
 	 */
-	public ArrayList<DadosClasse> getInfoMetodosPorProjetos(
-			ArrayList<String> projetos, boolean AdicionarArquitetura) {
-		ArrayList<DadosClasse> dadosTodasClasses = null;
-		ArrayList<String> listaArquivosdiretorios = new ArrayList<>();
-		for (String diretorio : projetos) {
-			listaArquivosdiretorios.addAll(getArquivosPorProjeto(diretorio));
-		}
-		AnalisadorClasseMetodo analisadorClasseMetodo = new AnalisadorClasseMetodo();
-		try {
-			if (AdicionarArquitetura) {
-				dadosTodasClasses = analisadorClasseMetodo
-						.getInfoMetodosDosArquivos(listaArquivosdiretorios, true);
-			} else {
-				dadosTodasClasses = analisadorClasseMetodo
-						.getInfoMetodosDosArquivos(listaArquivosdiretorios, false);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return dadosTodasClasses;
+	public ArrayList<CKNumber> getInfoMetodosPorProjetos(ArrayList<String> projetos){
+//		ArrayList<DadosClasse> dadosTodasClasses = null;
+//		ArrayList<String> listaArquivosdiretorios = new ArrayList<>();
+//		for (String diretorio : projetos) {
+//			listaArquivosdiretorios.addAll(getArquivosPorProjeto(diretorio));
+//		}
+//		
+		ArrayList<CKNumber> listaClasses = new ArrayList<>();
+		for (String path : projetos) {
+			CKReport report = new CK().calculate(path);
+			listaClasses.addAll(report.all());
+    	}
+		
+//		
+//		
+//	
+//		AnalisadorClasseMetodo analisadorClasseMetodo = new AnalisadorClasseMetodo();
+//		try {
+//			if (AdicionarArquitetura) {
+//				dadosTodasClasses = analisadorClasseMetodo
+//						.getInfoMetodosDosArquivos(listaArquivosdiretorios, true);
+//			} else {
+//				dadosTodasClasses = analisadorClasseMetodo
+//						.getInfoMetodosDosArquivos(listaArquivosdiretorios, false);
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		return listaClasses;
 	}
 
 	/**

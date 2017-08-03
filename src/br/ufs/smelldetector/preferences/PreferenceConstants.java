@@ -5,7 +5,7 @@ package br.ufs.smelldetector.preferences;
  */
 public class PreferenceConstants {
 
-	public static final String PROJETO_EXEMPLO = "pathPreference";
+	public static final String PROJETOS_EXEMPLOS = "pathPreference";
 
 	public static final String USAR_P_EXEMPLO_V_LIMIAR = "choicePreference";
 

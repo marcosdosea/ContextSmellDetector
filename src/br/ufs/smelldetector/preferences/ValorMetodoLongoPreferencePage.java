@@ -61,7 +61,7 @@ implements IWorkbenchPreferencePage {
 		escolhaProjetoExemploValorLimiarRG = new RadioGroupFieldEditor(PreferenceConstants.USAR_P_EXEMPLO_V_LIMIAR,
 				"&Choose the approach to code review: ", 1, opcoesProjetoRG, getFieldEditorParent(), true);
 		
-		projetoExemploDirectory = new DirectoryFieldEditor(PreferenceConstants.PROJETO_EXEMPLO, 
+		projetoExemploDirectory = new DirectoryFieldEditor(PreferenceConstants.PROJETOS_EXEMPLOS, 
 				"&Reference Project :  ", getFieldEditorParent());
 
 		porcentagemProjetoExemploField = new IntegerFieldEditor(PreferenceConstants

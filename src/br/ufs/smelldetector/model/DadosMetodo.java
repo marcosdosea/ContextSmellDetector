@@ -2,12 +2,13 @@ package br.ufs.smelldetector.model;
 
 public class DadosMetodo {
 	
-	private int linhaInicial;
 	private int linesOfCode;
 	private int complexity;
 	private int numberOfParameters;
 	private int efferent;
 	private String nomeMetodo;
+	
+	private int linhaInicial;
 	private int charInicial;
 	private int charFinal;
 	

@@ -3,11 +3,13 @@ package br.ufs.smelldetector.model;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import com.github.mauricioaniche.ck.CKNumber;
+
 public enum ProviderModel {
 
 	INSTANCE;
 	
-	public ArrayList<DadosClasse> dadosClasses;
+	public ArrayList<CKNumber> dadosClasses;
 	public ArrayList<DadosMetodoSmell> metodoslongos;
 	private ArrayList<String> interfacesAPI;
 	public LinkedList<DadosComponentesArquiteturais> dadosComponentesArquiteturais;

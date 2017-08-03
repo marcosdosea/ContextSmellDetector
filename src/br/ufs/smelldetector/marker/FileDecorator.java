@@ -22,7 +22,7 @@ public class FileDecorator extends LabelProvider implements ILightweightLabelDec
 			if (GerenciadorProjeto.projetoEstaNaAnalise(((IResource)resource).getProject()
 					.getLocation().toString())) {
 				//decoration.addOverlay(ImageDescriptor.createFromFile(FileDecorator.class, ICON));
-				decoration.addSuffix(" Project in analysis - ASLMT");
+				decoration.addSuffix(" Analysed by ContextSmell");
 				decoration.setFont(font);
 				decoration.setForegroundColor(color);
 			} else {

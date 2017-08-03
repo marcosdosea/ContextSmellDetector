@@ -1,6 +1,7 @@
 package br.ufs.smelldetector.negocio;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -22,9 +23,9 @@ import br.ufs.smelldetector.views.MetodoLongoView;
 public class AtualizadorInformacoesMetodoLongo {
 
 	public static void refreshAll() {
-		AnalisadorProjeto analisadorProjeto = new AnalisadorProjeto();
+		//AnalisadorProjeto analisadorProjeto = new AnalisadorProjeto();
 		GerenciadorProjeto.validaProjetosAtivos(Activator.projetos);
-		atulizarDadosProviderModel(analisadorProjeto);
+		atulizarDadosProviderModel(/*analisadorProjeto*/);
 		if (ProviderModel.INSTANCE.metodoslongos == null) {
 			ProviderModel.INSTANCE.metodoslongos = new ArrayList<>();
 		}
@@ -33,59 +34,69 @@ public class AtualizadorInformacoesMetodoLongo {
 		// refreshallProjects();
 	}
 
-	private static void atulizarDadosProviderModel(AnalisadorProjeto analisadorProjeto) {
+	private static void atulizarDadosProviderModel(/*AnalisadorProjeto analisadorProjeto*/) {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		FiltrarMetodosSmell filtrarMetodos = new FiltrarMetodosSmell();
+		HashMap<LimiarMetricaKey, LimiarMetrica> mapLimiarMetrica = null;
 		if (store.getString(PreferenceConstants.USAR_P_EXEMPLO_V_LIMIAR)
 				.equals(ValorMetodoLongoPreferencePage.OPCAOVALORLIMIAR)) {
-			ProviderModel.INSTANCE.dadosClasses = analisadorProjeto.getInfoMetodosPorProjetos(Activator.projetos,
-					false);
+			//ProviderModel.INSTANCE.dadosClasses = analisadorProjeto.getInfoMetodosPorProjetos(Activator.projetos);
 
 			int limiarLOC = Integer.parseInt(store.getString(PreferenceConstants.VALOR_LIMIAR));
 
-			HashMap<LimiarMetricaKey, LimiarMetrica> mapLimiarMetrica = new HashMap<LimiarMetricaKey, LimiarMetrica>();
-			mapLimiarMetrica = GerenciadorLimiares.obterLimiarPreDefinidoGlobal(limiarLOC, 20, 20, 5);
+			mapLimiarMetrica = new HashMap<LimiarMetricaKey, LimiarMetrica>();
+			mapLimiarMetrica = GerenciadorLimiares.obterLimiarPreDefinidoGlobal(limiarLOC, 15, 10, 4);
 
-			ProviderModel.INSTANCE.metodoslongos = filtrarMetodos.filtrar(ProviderModel.INSTANCE.dadosClasses,
+			ProviderModel.INSTANCE.metodoslongos = filtrarMetodos.filtrar(Activator.projetos,
 					mapLimiarMetrica);
 
 			System.out.println("Métodos longos valor limiar: " + ProviderModel.INSTANCE.metodoslongos.size()
 					+ " métodos encontrados.");
 		} else {
-			GerenciadorLimiares gpe = new GerenciadorLimiares();
 			if (store.getString(PreferenceConstants.USAR_P_EXEMPLO_V_LIMIAR)
 					.equals(ValorMetodoLongoPreferencePage.OPCAOPROJETOEXEMPLO)) {
 				if (store.getBoolean(PreferenceConstants.USAR_PREOCUPACAO_ARQUITETURAL)) {
-					ProviderModel.INSTANCE.dadosClasses = analisadorProjeto
-							.getInfoMetodosPorProjetos(Activator.projetos, true);
-
-					if (ProviderModel.INSTANCE.dadosComponentesArquiteturais == null) {
-						ProviderModel.INSTANCE.dadosComponentesArquiteturais = gpe.criarTabelaCompArquiteturais(
-								store.getString(PreferenceConstants.PROJETO_EXEMPLO),
-								store.getInt(PreferenceConstants.PORCENTAGEM_PROJETO_EXEMPLO));
-					}
-					ProviderModel.INSTANCE.metodoslongos = filtrarMetodos
-							.filtrarPorProjetoExemploPreocupacaoArquitetural(ProviderModel.INSTANCE.dadosClasses,
-									ProviderModel.INSTANCE.dadosComponentesArquiteturais);
+//					ProviderModel.INSTANCE.dadosClasses = analisadorProjeto
+//							.getInfoMetodosPorProjetos(Activator.projetos, true);
+//
+//					if (ProviderModel.INSTANCE.dadosComponentesArquiteturais == null) {
+//						ProviderModel.INSTANCE.dadosComponentesArquiteturais = gpe.criarTabelaCompArquiteturais(
+//								store.getString(PreferenceConstants.PROJETO_EXEMPLO),
+//								store.getInt(PreferenceConstants.PORCENTAGEM_PROJETO_EXEMPLO));
+//					}
+					// ProviderModel.INSTANCE.metodoslongos = filtrarMetodos
+					// .filtrarPorProjetoExemploPreocupacaoArquitetural(ProviderModel.INSTANCE.dadosClasses,
+					// ProviderModel.INSTANCE.dadosComponentesArquiteturais);
 					System.out.println("Métodos longos valor preocupação arquitetural: "
 							+ ProviderModel.INSTANCE.metodoslongos.size() + " métodos encontrados.");
 				} else {
-					ProviderModel.INSTANCE.dadosClasses = analisadorProjeto
-							.getInfoMetodosPorProjetos(Activator.projetos, false);
-					if (ProviderModel.INSTANCE.valorLimiarGlobal == 0) {
-						ProviderModel.INSTANCE.valorLimiarGlobal = gpe.obterValorLimiarGlobal(
-								store.getString(PreferenceConstants.PROJETO_EXEMPLO),
-								store.getInt(PreferenceConstants.PORCENTAGEM_PROJETO_EXEMPLO));
-					}
-					if (ProviderModel.INSTANCE.medianaGlobal == 0) {
-						ProviderModel.INSTANCE.medianaGlobal = gpe.obterMedianaGlobal(
-								store.getString(PreferenceConstants.PROJETO_EXEMPLO),
-								store.getInt(PreferenceConstants.PORCENTAGEM_PROJETO_EXEMPLO));
-					}
+					
+					ArrayList<String> projetosBenchmark = new ArrayList(Arrays.asList(store.getString(PreferenceConstants.PROJETOS_EXEMPLOS).split(";")));
+					int percentil = store.getInt(PreferenceConstants.PORCENTAGEM_PROJETO_EXEMPLO);
+					
+					mapLimiarMetrica = GerenciadorLimiares.obterLimiarBenchMarkPercentil(projetosBenchmark, percentil);
+					ProviderModel.INSTANCE.metodoslongos = filtrarMetodos.filtrar(Activator.projetos,
+							mapLimiarMetrica);
+
+					
+					
+//					ProviderModel.INSTANCE.dadosClasses = analisadorProjeto
+//							.getInfoMetodosPorProjetos(Activator.projetos, false);
+//					if (ProviderModel.INSTANCE.valorLimiarGlobal == 0) {
+//						ProviderModel.INSTANCE.valorLimiarGlobal = gpe.obterValorLimiarGlobal(
+//								store.getString(PreferenceConstants.PROJETOS_EXEMPLO),
+//								store.getInt(PreferenceConstants.PORCENTAGEM_PROJETO_EXEMPLO));
+//					}
+//					
+//					if (ProviderModel.INSTANCE.medianaGlobal == 0) {
+//						ProviderModel.INSTANCE.medianaGlobal = gpe.obterMedianaGlobal(
+//								store.getString(PreferenceConstants.PROJETO_EXEMPLO),
+//								store.getInt(PreferenceConstants.PORCENTAGEM_PROJETO_EXEMPLO));
+//					}
 					// Adicionar na lista de métodos longos
-					ProviderModel.INSTANCE.metodoslongos = filtrarMetodos.filtrarPorProjetoExemploGeral(
-							ProviderModel.INSTANCE.dadosClasses, ProviderModel.INSTANCE.valorLimiarGlobal,
-							ProviderModel.INSTANCE.medianaGlobal);
+//					ProviderModel.INSTANCE.metodoslongos = filtrarMetodos.filtrarPorProjetoExemploGeral(
+//							ProviderModel.INSTANCE.dadosClasses, ProviderModel.INSTANCE.valorLimiarGlobal,
+//							ProviderModel.INSTANCE.medianaGlobal);
 					System.out.println("Métodos longos valor global projeto exemplo: "
 							+ ProviderModel.INSTANCE.metodoslongos.size() + " métodos encontrados.");
 				}
