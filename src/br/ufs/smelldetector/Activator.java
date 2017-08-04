@@ -9,7 +9,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import br.ufs.smelldetector.negocio.AtualizadorInformacoesMetodoLongo;
+import br.ufs.smelldetector.negocio.AnalisadorProjeto;
 import br.ufs.smelldetector.negocio.CarregaSalvaArquivo;
 import br.ufs.smelldetector.reports.ResourceChangeReporter;
 
@@ -39,7 +39,7 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 		projetos = CarregaSalvaArquivo.carregarProjetos();
-		AtualizadorInformacoesMetodoLongo.refreshAll();
+		AnalisadorProjeto.refreshAll();
 		listener = new ResourceChangeReporter();
 		adicionarEscutaAlteracaoDiretorio();
 	}

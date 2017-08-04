@@ -12,7 +12,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import br.ufs.smelldetector.Activator;
 import br.ufs.smelldetector.model.ProviderModel;
-import br.ufs.smelldetector.negocio.AtualizadorInformacoesMetodoLongo;
+import br.ufs.smelldetector.negocio.AnalisadorProjeto;
 
 /**
  * This class represents a preference page that
@@ -168,7 +168,7 @@ implements IWorkbenchPreferencePage {
 		ProviderModel.INSTANCE.dadosComponentesArquiteturais = null;
 		ProviderModel.INSTANCE.valorLimiarGlobal = 0;
 		ProviderModel.INSTANCE.medianaGlobal = 0;
-		AtualizadorInformacoesMetodoLongo.refreshAll();
+		AnalisadorProjeto.refreshAll();
 	}
 
 	/* (non-Javadoc)

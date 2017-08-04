@@ -13,26 +13,30 @@ import br.ufs.smelldetector.model.LimiarMetricaKey;
 
 public class FiltrarMetodosSmell {
 
-	public static ArrayList<DadosMetodoSmell> filtrar(ArrayList<String> projetosAnalisar,
-			HashMap<LimiarMetricaKey, LimiarMetrica> mapLimiarMetrica) {
+	public static HashMap<String, DadosMetodoSmell> filtrar(ArrayList<String> projetosAnalisar,
+			HashMap<LimiarMetricaKey, LimiarMetrica> mapLimiarMetrica, HashMap<String, DadosMetodoSmell> metodosSmell,
+			String tecnica) {
+		if (metodosSmell == null)
+			metodosSmell = new HashMap<>();
 
-		AnalisadorProjeto analisadorProjeto = new AnalisadorProjeto();
-		ArrayList<CKNumber> classesAnalisar = analisadorProjeto.getInfoMetodosPorProjetos(projetosAnalisar);
-
-		ArrayList<DadosMetodoSmell> listaMetodosSmell = new ArrayList<>();
+		ArrayList<CKNumber> classesAnalisar = AnalisadorProjeto.getMetricasProjetos(projetosAnalisar);
 
 		for (CKNumber classe : classesAnalisar) {
-			LimiarMetrica limiarLOC = mapLimiarMetrica.get(new LimiarMetricaKey(LimiarMetrica.LOC, classe.getDesignRole()));
-			if (limiarLOC == null) 
-				limiarLOC = mapLimiarMetrica.get(new LimiarMetricaKey(LimiarMetrica.LOC, LimiarMetrica.DESIGN_ROLE_UNDEFINED));
-			
-			LimiarMetrica limiarCC = mapLimiarMetrica.get(new LimiarMetricaKey(LimiarMetrica.CC, classe.getDesignRole()));
+			LimiarMetrica limiarLOC = mapLimiarMetrica
+					.get(new LimiarMetricaKey(LimiarMetrica.LOC, classe.getDesignRole()));
+			if (limiarLOC == null)
+				limiarLOC = mapLimiarMetrica
+						.get(new LimiarMetricaKey(LimiarMetrica.LOC, LimiarMetrica.DESIGN_ROLE_UNDEFINED));
+
+			LimiarMetrica limiarCC = mapLimiarMetrica
+					.get(new LimiarMetricaKey(LimiarMetrica.CC, classe.getDesignRole()));
 			if (limiarCC == null)
-				limiarCC = mapLimiarMetrica.get(new LimiarMetricaKey(LimiarMetrica.CC, LimiarMetrica.DESIGN_ROLE_UNDEFINED));
-			
+				limiarCC = mapLimiarMetrica
+						.get(new LimiarMetricaKey(LimiarMetrica.CC, LimiarMetrica.DESIGN_ROLE_UNDEFINED));
+
 			LimiarMetrica limiarEfferent = mapLimiarMetrica
 					.get(new LimiarMetricaKey(LimiarMetrica.Efferent, LimiarMetrica.DESIGN_ROLE_UNDEFINED));
-			
+
 			LimiarMetrica limiarNOP = mapLimiarMetrica
 					.get(new LimiarMetricaKey(LimiarMetrica.NOP, LimiarMetrica.DESIGN_ROLE_UNDEFINED));
 
@@ -44,29 +48,29 @@ public class FiltrarMetodosSmell {
 					String mensagem = "Methods in this system have on maximum " + limiarLOC.getLimiarMaximo()
 							+ " lines of code. " + "\nMake sure refactoring could be applied.";
 					String type = "Long Method";
-					addMetodoSmell(classe, metodo, metodoMetrics, type, mensagem, listaMetodosSmell);
+					addMetodoSmell(classe, metodo, metodoMetrics, type, mensagem, metodosSmell, tecnica);
 				}
 				if (metodoMetrics.getComplexity() > limiarCC.getLimiarMaximo()) {
 					String mensagem = "Methods in this type class have on maximum " + limiarCC.getLimiarMaximo()
 							+ " cyclomatic complexity. " + "\nMake sure refactoring could be applied.";
 					String type = "High Complexity";
-					addMetodoSmell(classe, metodo, metodoMetrics, type, mensagem, listaMetodosSmell);
+					addMetodoSmell(classe, metodo, metodoMetrics, type, mensagem, metodosSmell, tecnica);
 				}
 				if (metodoMetrics.getEfferentCoupling() > limiarEfferent.getLimiarMaximo()) {
 					String mensagem = "Methods in this type class have on maximum " + limiarEfferent.getLimiarMaximo()
 							+ " efferent coupling. " + "\nMake sure refactoring could be applied.";
 					String type = "High Efferent Coupling";
-					addMetodoSmell(classe, metodo, metodoMetrics, type, mensagem, listaMetodosSmell);
+					addMetodoSmell(classe, metodo, metodoMetrics, type, mensagem, metodosSmell, tecnica);
 				}
 				if (metodoMetrics.getNumberOfParameters() > limiarNOP.getLimiarMaximo()) {
 					String mensagem = "Methods in this type class have on maximum " + limiarNOP.getLimiarMaximo()
 							+ " number of parameters. " + "\nMake sure refactoring could be applied.";
 					String type = "High Number of Parameters";
-					addMetodoSmell(classe, metodo, metodoMetrics, type, mensagem, listaMetodosSmell);
+					addMetodoSmell(classe, metodo, metodoMetrics, type, mensagem, metodosSmell, tecnica);
 				}
 			}
 		}
-		return listaMetodosSmell;
+		return metodosSmell;
 	}
 
 	// public ArrayList<DadosMetodoSmell>
@@ -194,7 +198,8 @@ public class FiltrarMetodosSmell {
 	// }
 
 	private static void addMetodoSmell(CKNumber classe, MethodData metodo, MethodMetrics metricas, String type,
-			String mensagem, ArrayList<DadosMetodoSmell> listaMetodosSmell) {
+			String mensagem, HashMap<String, DadosMetodoSmell> metodosSmell, String tecnica) {
+
 		DadosMetodoSmell dadosMetodoSmell = new DadosMetodoSmell();
 		dadosMetodoSmell.setCharFinal(metodo.getFinalChar());
 		dadosMetodoSmell.setCharInicial(metodo.getInitialChar());
@@ -202,13 +207,23 @@ public class FiltrarMetodosSmell {
 		dadosMetodoSmell.setLinhaInicial(metodo.getInitialLine());
 		dadosMetodoSmell.setNomeClasse(classe.getClassName());
 		dadosMetodoSmell.setNomeMetodo(metodo.getNomeMethod());
+		dadosMetodoSmell.setSmell(type);
+
+		DadosMetodoSmell metodoSmellExistente = metodosSmell.get(dadosMetodoSmell.getKey());
+		if (metodoSmellExistente != null)
+			dadosMetodoSmell = metodoSmellExistente;
+		else {
+			String numeroMetodo = String.format("%02d", metodosSmell.size() + 1);
+			dadosMetodoSmell.setCodigoMetodo("M" + numeroMetodo);
+		}
+
 		dadosMetodoSmell.setLinesOfCode(metricas.getLinesOfCode());
 		dadosMetodoSmell.setEfferent(metricas.getEfferentCoupling());
 		dadosMetodoSmell.setComplexity(metricas.getComplexity());
 		dadosMetodoSmell.setNumberOfParameters(metricas.getNumberOfParameters());
-		dadosMetodoSmell.setMensagem(mensagem);
-		dadosMetodoSmell.setType(type);
-		listaMetodosSmell.add(dadosMetodoSmell);
+		dadosMetodoSmell.addMensagem(mensagem);
+		dadosMetodoSmell.addTecnica(tecnica);
+		metodosSmell.put(dadosMetodoSmell.getKey(), dadosMetodoSmell);
 	}
 
 }

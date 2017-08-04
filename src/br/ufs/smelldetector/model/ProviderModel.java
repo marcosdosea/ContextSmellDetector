@@ -1,6 +1,7 @@
 package br.ufs.smelldetector.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import com.github.mauricioaniche.ck.CKNumber;
@@ -8,14 +9,14 @@ import com.github.mauricioaniche.ck.CKNumber;
 public enum ProviderModel {
 
 	INSTANCE;
-	
+
 	public ArrayList<CKNumber> dadosClasses;
-	public ArrayList<DadosMetodoSmell> metodoslongos;
+	public HashMap<String, DadosMetodoSmell> metodosSmell;
 	private ArrayList<String> interfacesAPI;
 	public LinkedList<DadosComponentesArquiteturais> dadosComponentesArquiteturais;
 	public int valorLimiarGlobal;
 	public int medianaGlobal;
-	
+
 	public ArrayList<String> getInterfacesAPI() {
 		if (interfacesAPI == null) {
 			interfacesAPI = new ArrayList<>();
@@ -1049,5 +1050,5 @@ public enum ProviderModel {
 		}
 		return interfacesAPI;
 	}
-	
+
 }

@@ -2,6 +2,7 @@ package br.ufs.smelldetector.marker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -36,7 +37,13 @@ public class MarkerFactory {
 		IMarker marker = null;
 		// note: you use the id that is defined in your plugin.xml
 		marker = resource.createMarker(ID_MARCADOR);
-		marker.setAttribute(IMarker.MESSAGE, informacoes.getMensagem());
+		String textoMensagem = "<html>";
+		for (String mensagem : informacoes.getListaMensagens()) {
+			textoMensagem += mensagem + "<br />";
+		}
+		textoMensagem += "</html>\"";
+		marker.setAttribute(IMarker.MESSAGE, textoMensagem);
+
 		// compute and set char start and char end
 		marker.setAttribute(IMarker.CHAR_START, informacoes.getCharInicial());
 		marker.setAttribute(IMarker.CHAR_END, informacoes.getCharFinal());
@@ -73,7 +80,7 @@ public class MarkerFactory {
 		}
 	}
 
-	public void adicionarMarcadoresMetodosLongos(ArrayList<DadosMetodoSmell> metodosLongos) {
+	public void adicionarMarcadoresMetodosLongos(Collection<DadosMetodoSmell> metodosLongos) {
 		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 			public void run() {
 				ITextEditor editor = null;

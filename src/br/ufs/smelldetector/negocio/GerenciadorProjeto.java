@@ -64,13 +64,13 @@ public class GerenciadorProjeto {
 		MessageDialog dialog = null;
 		if (projetoSelecionado != null) {
 			Activator.projetos.add(projetoSelecionado);
-			AtualizadorInformacoesMetodoLongo.refreshAll();
-			dialog = new MessageDialog(null, "ContextLongMethod", null, 
+			AnalisadorProjeto.refreshAll();
+			dialog = new MessageDialog(null, "ContextSmell", null, 
 					"Project Added To Review", 
 					MessageDialog.INFORMATION, new String[] {"OK"}, 0);
 			
 		} else {
-			dialog = new MessageDialog(null, "ContextLongMethod", null, 
+			dialog = new MessageDialog(null, "ContextSmell", null, 
 					"Não foi possível adicionar o projeto.\n"
 							+ "Pois, não foi possível obter o projeto selecionado", 
 					MessageDialog.INFORMATION, new String[] {"OK"}, 0);
@@ -91,7 +91,7 @@ public class GerenciadorProjeto {
 			}
 			Activator.projetos = projetos;
 			new MarkerFactory().deleteMarcadorPorProjeto(projetoSelecionado);
-			AtualizadorInformacoesMetodoLongo.refreshAll();
+			AnalisadorProjeto.refreshAll();
 			dialog = new MessageDialog(null, "ContextLongMethod", null, 
 					"Removed Analysis Project", 
 					MessageDialog.INFORMATION, new String[] {"OK"}, 0);

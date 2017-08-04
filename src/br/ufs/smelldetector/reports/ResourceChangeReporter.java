@@ -5,7 +5,7 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 
 import br.ufs.smelldetector.Activator;
-import br.ufs.smelldetector.negocio.AtualizadorInformacoesMetodoLongo;
+import br.ufs.smelldetector.negocio.AnalisadorProjeto;
 import br.ufs.smelldetector.negocio.GerenciadorProjeto;
 
 public class ResourceChangeReporter implements IResourceChangeListener {
@@ -15,7 +15,7 @@ public class ResourceChangeReporter implements IResourceChangeListener {
 		case IResourceChangeEvent.POST_BUILD:
 			if (temMudancasProjetosEmAnalise(event)) {
 				System.out.println("Alterou algo ");
-				AtualizadorInformacoesMetodoLongo.refreshAll();
+				AnalisadorProjeto.refreshAll();
 			}
 			//System.out.println("Resources have changed.");
 			//event.getDelta().accept(new DeltaPrinter());*/

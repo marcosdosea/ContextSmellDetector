@@ -38,46 +38,49 @@ public class MetodoLongoComparator extends ViewerComparator {
 		int rc = 0;
 		switch (propertyIndex) {
 		case 0:
-			rc = p1.getDiretorioDaClasse().compareTo(p2.getDiretorioDaClasse());
+			rc = p1.getCodigoMetodo().compareTo(p2.getCodigoMetodo());
 			break;
 		case 1:
-			rc = p1.getNomeClasse().compareTo(p2.getNomeClasse());
+			rc = p1.getListaTecnicas().toString().compareTo(p2.getListaTecnicas().toString());
 			break;
 		case 2:
-			rc = p1.getNomeMetodo().compareTo(p2.getNomeMetodo());
+			rc = p1.getNomeClasse().compareTo(p2.getNomeClasse());
 			break;
 		case 3:
+			rc = p1.getNomeMetodo().compareTo(p2.getNomeMetodo());
+			break;
+		case 4:
 			if (p1.getLinhaInicial() >= p2.getLinhaInicial()) {
 				rc = 1;
 			} else
 				rc = -1;
 			break;
-		case 4:
+		case 5:
 			if (p1.getLinesOfCode() >= p2.getLinesOfCode()) {
 				rc = 1;
 			} else
 				rc = -1;
 			break;
-		case 5:
+		case 6:
 			if (p1.getComplexity() >= p2.getComplexity()) {
 				rc = 1;
 			} else
 				rc = -1;
 			break;
-		case 6:
+		case 7:
 			if (p1.getEfferent() >= p2.getEfferent()) {
 				rc = 1;
 			} else
 				rc = -1;
 			break;
-		case 7:
+		case 8:
 			if (p1.getNumberOfParameters() >= p2.getNumberOfParameters() ) {
 				rc = 1;
 			} else
 				rc = -1;
 			break;
-		case 8:
-			rc = p1.getType().compareTo(p2.getType());
+		case 9:
+			rc = p1.getSmell().toString().compareTo(p2.getSmell().toString());
 			break;
 		default:
 			rc = 0;

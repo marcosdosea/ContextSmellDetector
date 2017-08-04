@@ -95,7 +95,7 @@ public class MetodoLongoView extends ViewPart {
 		viewer.setContentProvider(new ArrayContentProvider());
 		// get the content for the viewer, setInput will call getElements in the
 		// contentProvider
-		viewer.setInput(ProviderModel.INSTANCE.metodoslongos);
+		viewer.setInput(ProviderModel.INSTANCE.metodosSmell.values());
 		// make the selection available to other views
 		getSite().setSelectionProvider(viewer);
 		// define layout for the viewer
@@ -118,15 +118,15 @@ public class MetodoLongoView extends ViewPart {
 
 	// create the columns for the table
 	private void createColumns(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "Directory", "Class", "Method", "Initial Line", "LOC", "CC", "Efferent", "NOP", "Type"};
-		int[] bounds = { 200, 200, 200, 50, 50, 50, 50, 50, 100 };
+		String[] titles = { "Code", "Approaches", "Class", "Method", "Initial Line", "LOC", "CC", "Efferent", "NOP", "Type"};
+		int[] bounds = { 50, 70, 250, 100, 50, 50, 50, 50, 50, 300 };
 
 		TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				DadosMetodoSmell p = (DadosMetodoSmell) element;
-				return p.getDiretorioDaClasse();
+				return p.getCodigoMetodo();
 			}
 		});
 
@@ -135,7 +135,7 @@ public class MetodoLongoView extends ViewPart {
 			@Override
 			public String getText(Object element) {
 				DadosMetodoSmell p = (DadosMetodoSmell) element;
-				return p.getNomeClasse();
+				return p.getListaTecnicas().toString().replace('[', ' ').replace(']', ' ');
 			}
 		});
 		
@@ -144,16 +144,16 @@ public class MetodoLongoView extends ViewPart {
 			@Override
 			public String getText(Object element) {
 				DadosMetodoSmell p = (DadosMetodoSmell) element;
-				return p.getNomeMetodo();
+				return p.getNomeClasse();
 			}
 		});
-
+		
 		col = createTableViewerColumn(titles[3], bounds[3], 3);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				DadosMetodoSmell p = (DadosMetodoSmell) element;
-				return p.getLinhaInicial()+"";
+				return p.getNomeMetodo();
 			}
 		});
 
@@ -162,16 +162,16 @@ public class MetodoLongoView extends ViewPart {
 			@Override
 			public String getText(Object element) {
 				DadosMetodoSmell p = (DadosMetodoSmell) element;
-				return p.getLinesOfCode()+"";
+				return p.getLinhaInicial()+"";
 			}
 		});
-		
+
 		col = createTableViewerColumn(titles[5], bounds[5], 5);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				DadosMetodoSmell p = (DadosMetodoSmell) element;
-				return p.getComplexity() +"";
+				return p.getLinesOfCode()+"";
 			}
 		});
 		
@@ -180,11 +180,20 @@ public class MetodoLongoView extends ViewPart {
 			@Override
 			public String getText(Object element) {
 				DadosMetodoSmell p = (DadosMetodoSmell) element;
-				return p.getEfferent() + "";
+				return p.getComplexity() +"";
 			}
 		});
 		
 		col = createTableViewerColumn(titles[7], bounds[7], 7);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				DadosMetodoSmell p = (DadosMetodoSmell) element;
+				return p.getEfferent() + "";
+			}
+		});
+		
+		col = createTableViewerColumn(titles[8], bounds[8], 8);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
@@ -195,12 +204,12 @@ public class MetodoLongoView extends ViewPart {
 		
 		
 		
-		col = createTableViewerColumn(titles[8], bounds[8], 8);
+		col = createTableViewerColumn(titles[9], bounds[9], 9);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				DadosMetodoSmell p = (DadosMetodoSmell) element;
-				return p.getType();
+				return p.getSmell();
 			}
 		});
 	}

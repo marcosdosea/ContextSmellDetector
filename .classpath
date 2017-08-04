@@ -14,6 +14,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="lib/designroleminer.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/designroleminer.jar" sourcepath="lib/designroleminer.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

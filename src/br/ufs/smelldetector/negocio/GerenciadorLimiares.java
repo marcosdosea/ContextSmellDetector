@@ -51,8 +51,7 @@ public class GerenciadorLimiares {
 
 		HashMap<LimiarMetricaKey, LimiarMetrica> mapLimiarMetrica = new HashMap<LimiarMetricaKey, LimiarMetrica>();
 
-		AnalisadorProjeto analisadorProjeto = new AnalisadorProjeto();
-		ArrayList<CKNumber> classesBenchmark = analisadorProjeto.getInfoMetodosPorProjetos(projetosBenchmark);
+		ArrayList<CKNumber> classesBenchmark = AnalisadorProjeto.getMetricasProjetos(projetosBenchmark);
 
 		ArrayList<Integer> listLOC = new ArrayList<>();
 		ArrayList<Integer> listCC = new ArrayList<>();
