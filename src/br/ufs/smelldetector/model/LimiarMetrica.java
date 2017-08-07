@@ -14,6 +14,7 @@ public class LimiarMetrica {
 	private int limiarMedio;
 	private int limiarMaximo;
 	private int limiarMaximo2;
+	
 	public String getMetrica() {
 		return metrica;
 	}
@@ -43,6 +44,9 @@ public class LimiarMetrica {
 	}
 	public void setLimiarMaximo2(int limiarMaximo2) {
 		this.limiarMaximo2 = limiarMaximo2;
+	}
+	public String getKey() {
+		return getMetrica()+getDesignRole();
 	}
 	@Override
 	public boolean equals(Object obj) {
