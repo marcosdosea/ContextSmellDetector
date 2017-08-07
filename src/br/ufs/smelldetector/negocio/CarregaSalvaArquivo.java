@@ -46,7 +46,7 @@ public class CarregaSalvaArquivo {
 				limiarTecnica.setTecnica(arquivoLimiar.getName().substring(0, arquivoLimiar.getName().indexOf(".csv")));
 				limiarTecnica.setMetricas(limiares);
 				Scanner scanner = new Scanner(arquivoLimiar);
-				scanner.useDelimiter(";");
+				scanner.useDelimiter(",");
 
 				if (scanner.hasNextLine()) {
 					String cabecalho = scanner.nextLine();
