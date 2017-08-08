@@ -39,7 +39,7 @@
       <page
             class="br.ufs.smelldetector.preferences.ValorMetodoLongoPreferencePage"
             id="br.ufs.smelldetector.preferences.ValorMetodoLongoPreferencePage"
-            name="ContextLongMethod">
+            name="ContextSmell">
       </page>
    </extension>
    <extension

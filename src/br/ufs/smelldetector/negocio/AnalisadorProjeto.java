@@ -56,6 +56,7 @@ public class AnalisadorProjeto {
 	 * comparação
 	 */
 	private static void atulizarDadosProviderModel() {
+		ProviderModel.INSTANCE.metodosSmell = new HashMap<>();
 		List<LimiarTecnica> listaTecnicas = CarregaSalvaArquivo.carregarLimiares();
 		ArrayList<CKNumber> projetosAnalisar = AnalisadorProjeto.getMetricasProjetos(Activator.projetos);
 		FiltrarMetodosSmell.filtrar(projetosAnalisar, listaTecnicas, ProviderModel.INSTANCE.metodosSmell);
