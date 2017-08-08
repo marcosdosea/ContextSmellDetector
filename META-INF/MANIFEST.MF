@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: LongMethodDetector
+Bundle-Name: ContextSmell
 Bundle-SymbolicName: ContextSmell;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: br.ufs.smelldetector.Activator
-Bundle-Vendor: CLEVERTON
+Bundle-Vendor: Federal University of Sergipe
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.ui.ide,
@@ -23,3 +23,102 @@ Bundle-ClassPath: lib/designroleminer.jar,
  .,
  lib/google-collections-1.0.jar,
  lib/junit.jar
+Export-Package: br.ufba.designroleminer;
+  uses:="br.com.metricminer2.scm,
+   br.com.metricminer2,
+   org.eclipse.jdt.core.dom,
+   br.com.metricminer2.domain,
+   br.com.metricminer2.persistence",
+ br.ufba.limiares,
+ br.ufs.smelldetector;uses:="org.osgi.framework,org.eclipse.jface.resource,org.eclipse.ui.plugin",
+ br.ufs.smelldetector.marker;
+  uses:="br.ufs.smelldetector.model,
+   org.eclipse.ui.texteditor,
+   org.eclipse.core.resources,
+   org.eclipse.jface.viewers",
+ br.ufs.smelldetector.model,
+ br.ufs.smelldetector.negocio,
+ br.ufs.smelldetector.popup;uses:="org.eclipse.ui,org.eclipse.jface.action,org.eclipse.jface.viewers",
+ br.ufs.smelldetector.preferences;
+  uses:="org.eclipse.ui,
+   org.eclipse.jface.util,
+   org.eclipse.jface.preference,
+   org.eclipse.core.runtime.preferences",
+ br.ufs.smelldetector.reports;uses:="org.eclipse.core.resources",
+ br.ufs.smelldetector.views;
+  uses:="org.eclipse.ui,
+   org.eclipse.swt.widgets,
+   org.eclipse.jface.viewers,
+   org.eclipse.ui.part",
+ com.github.mauricioaniche.ck;uses:="org.eclipse.jdt.core.dom",
+ com.github.mauricioaniche.ck.metric;uses:="org.eclipse.jdt.core.dom,com.github.mauricioaniche.ck",
+ com.google.common.annotations,
+ com.google.common.base;uses:="new com.google.common.base",
+ com.google.common.base.internal;x-internal:=true,
+ com.google.common.collect;uses:="new new com.google.common.collect,com.google.common.base,new com.google.common.collect",
+ junit.extensions;uses:="junit.framework",
+ junit.framework;uses:="org.junit.runner.notification,org.junit.runner,org.junit.runner.manipulation",
+ junit.runner;uses:="junit.framework",
+ junit.textui;uses:="junit.runner,junit.framework",
+ org.junit;uses:="org.junit.runners,org.junit.internal,org.hamcrest",
+ org.junit.experimental;uses:="org.junit.runners.model,org.junit.runner",
+ org.junit.experimental.categories;
+  uses:="org.junit.runners,
+   org.junit.runners.model,
+   org.junit.runner,
+   org.junit.validator,
+   org.junit.runner.manipulation",
+ org.junit.experimental.max;
+  uses:="org.junit.runners,
+   new org.junit.experimental.max,
+   org.junit.runner.notification,
+   org.junit.runner",
+ org.junit.experimental.results;uses:="org.junit.runner,org.hamcrest",
+ org.junit.experimental.runners;uses:="org.junit.runners,org.junit.runners.model",
+ org.junit.experimental.theories;
+  uses:="org.junit.runners,
+   org.junit.runners.model,
+   org.junit.internal,
+   new org.junit.experimental.theories,
+   org.junit.experimental.theories.internal",
+ org.junit.experimental.theories.internal;x-internal:=true,
+ org.junit.experimental.theories.suppliers;uses:="org.junit.experimental.theories",
+ org.junit.internal;x-internal:=true,
+ org.junit.internal.builders;x-internal:=true,
+ org.junit.internal.matchers;x-internal:=true,
+ org.junit.internal.requests;x-internal:=true,
+ org.junit.internal.runners;x-internal:=true,
+ org.junit.internal.runners.model;x-internal:=true,
+ org.junit.internal.runners.rules;x-internal:=true,
+ org.junit.internal.runners.statements;x-internal:=true,
+ org.junit.matchers;uses:="org.hamcrest.core,org.hamcrest",
+ org.junit.rules;
+  uses:="org.junit.runners.model,
+   org.junit.internal,
+   org.junit.runner,
+   org.hamcrest,
+   org.junit",
+ org.junit.runner;
+  uses:="org.junit.runners.model,
+   org.junit.runner.notification,
+   org.junit.internal,
+   junit.framework,
+   org.junit.runner.manipulation",
+ org.junit.runner.manipulation;uses:="org.junit.runner",
+ org.junit.runner.notification;uses:="org.junit.runner",
+ org.junit.runners;
+  uses:="org.junit.runners.model,
+   org.junit.runner.notification,
+   org.junit.runner,
+   org.junit.internal.runners,
+   org.junit.internal.runners.model,
+   org.junit.runner.manipulation",
+ org.junit.runners.model;uses:="org.junit.runner,org.junit.internal.runners.model",
+ org.junit.runners.parameterized;
+  uses:="org.junit.runners,
+   org.junit.runners.model,
+   org.junit.runner.notification,
+   org.junit.runner",
+ org.junit.validator;uses:="org.junit.runners.model",
+ resources,
+ target

@@ -54,7 +54,7 @@
 		<objectContribution id="Clarity.objectContribution2"
 	 		objectClass="org.eclipse.jdt.core.IOpenable">
          	<action
-               label="Enable ContextLongMethod Analysis"
+               label="Enable ContextSmell Analysis"
                class="br.ufs.smelldetector.popup.AdicionarAnaliseProjeto"
                menubarPath="additions"
                id="br.ufs.smelldetector.popupMenu.adicionarProjeto">
@@ -65,7 +65,7 @@
 		<objectContribution id="Clarity.objectContribution2"
 	 		objectClass="org.eclipse.jdt.core.IOpenable">
          	<action
-               label="Disable ContextLongMethod Analysis"
+               label="Disable ContextSmell Analysis"
                class="br.ufs.smelldetector.popup.RemoverAnaliseProjeto"
                menubarPath="additions"
                id="br.ufs.smelldetector.popupMenu.removerProjeto">
