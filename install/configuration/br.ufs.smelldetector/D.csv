@@ -1,0 +1,10 @@
+DesignRole;LOC;CC;Efferent;NOP;
+Persistence;45;7;11;4;
+Entity;11;1;4;6;
+Undefined;49;9;17;4;
+TransacaoRelatorio;443;63;56;4;
+Transacao;139;28;28;4;
+TransacaoMantab;4;1;0;0;
+Abas;25;4;2;3;
+Exception;6;1;1;1;
+BackgroundProcess;514;83;33;4;

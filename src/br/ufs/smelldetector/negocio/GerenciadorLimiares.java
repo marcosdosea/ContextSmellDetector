@@ -43,6 +43,26 @@ public class GerenciadorLimiares {
 
 		return mapLimiarMetrica;
 	}
+	
+	public static void gerarPlanilhaDesignRole(ArrayList<CKNumber> classesBenchmark) {
+
+		HashMap<String, LimiarMetrica> mapLimiarMetrica = new HashMap<String, LimiarMetrica>();
+
+		ArrayList<Integer> listLOC = new ArrayList<>();
+		ArrayList<Integer> listCC = new ArrayList<>();
+		ArrayList<Integer> listEfferent = new ArrayList<>();
+		ArrayList<Integer> listNOP = new ArrayList<>();
+
+		for (CKNumber classe : classesBenchmark) {
+			for (MethodMetrics metodo : classe.getMetricsByMethod().values()) {
+				listLOC.add(metodo.getLinesOfCode());
+				listCC.add(metodo.getComplexity());
+				listEfferent.add(metodo.getEfferentCoupling());
+				listNOP.add(metodo.getNumberOfParameters());
+			}
+		}
+	}
+	
 
 	public static HashMap<String, LimiarMetrica> obterLimiarBenchMarkPercentil(
 			ArrayList<CKNumber> classesBenchmark, int percentil) {

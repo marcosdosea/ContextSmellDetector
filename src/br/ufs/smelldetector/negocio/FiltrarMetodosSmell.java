@@ -208,14 +208,26 @@ public class FiltrarMetodosSmell {
 		dadosMetodoSmell.setLinhaInicial(metodo.getInitialLine());
 		dadosMetodoSmell.setNomeClasse(classe.getClassName());
 		dadosMetodoSmell.setNomeMetodo(metodo.getNomeMethod());
+		dadosMetodoSmell.setTotalMetodosClasse(classe.getNom());
 		dadosMetodoSmell.setSmell(type);
 
 		DadosMetodoSmell metodoSmellExistente = metodosSmell.get(dadosMetodoSmell.getKey());
 		if (metodoSmellExistente != null)
 			dadosMetodoSmell = metodoSmellExistente;
 		else {
-			String numeroMetodo = String.format("%02d", metodosSmell.size() + 1);
-			dadosMetodoSmell.setCodigoMetodo("M" + numeroMetodo);
+			String codigoMetodo = null;
+			for (DadosMetodoSmell metodoSmell: metodosSmell.values()) {
+				if (metodoSmell.getDiretorioDaClasse().equals(classe.getFile()) &&
+						(metodoSmell.getLinhaInicial() == metodo.getInitialLine()) ) {
+					dadosMetodoSmell.setCodigoMetodo(metodoSmell.getCodigoMetodo()); 
+					codigoMetodo = metodoSmell.getCodigoMetodo();
+					break;
+				}
+			}
+			if (codigoMetodo == null) {
+				codigoMetodo = String.format("%02d", metodosSmell.size() + 1);
+				dadosMetodoSmell.setCodigoMetodo("M" + codigoMetodo);
+			}
 		}
 
 		dadosMetodoSmell.setLinesOfCode(metricas.getLinesOfCode());

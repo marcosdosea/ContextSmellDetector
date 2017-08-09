@@ -24,6 +24,11 @@ public class GerenciadorProjeto {
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			IProject iProject = workspace.getRoot().getProject(
 					nomeProjetoPorCaminho(projetos.get(i)));
+			
+			String nome = nomeProjetoPorCaminho(projetos.get(i));
+			boolean existe = iProject.exists();
+			boolean opened = iProject.isOpen();
+			
 			if (!(iProject.exists() && iProject.isOpen())) {
 				projetos.remove(i);
 			}

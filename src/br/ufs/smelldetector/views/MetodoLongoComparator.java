@@ -12,8 +12,8 @@ public class MetodoLongoComparator extends ViewerComparator {
 	private int direction = DESCENDING;
 
 	public MetodoLongoComparator() {
-		this.propertyIndex = 0;
-		direction = DESCENDING;
+		this.propertyIndex = 2;
+		direction = 0;
 	}
 
 	public int getDirection() {
@@ -47,13 +47,9 @@ public class MetodoLongoComparator extends ViewerComparator {
 			rc = p1.getNomeClasse().compareTo(p2.getNomeClasse());
 			break;
 		case 3:
-			rc = p1.getNomeMetodo().compareTo(p2.getNomeMetodo());
-			break;
+			rc = p1.getCodigoMetodo().compareTo(p2.getCodigoMetodo());
 		case 4:
-			if (p1.getLinhaInicial() >= p2.getLinhaInicial()) {
-				rc = 1;
-			} else
-				rc = -1;
+			rc = p1.getNomeMetodo().compareTo(p2.getNomeMetodo());
 			break;
 		case 5:
 			if (p1.getLinesOfCode() >= p2.getLinesOfCode()) {

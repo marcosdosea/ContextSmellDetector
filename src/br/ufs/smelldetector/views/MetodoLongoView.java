@@ -118,8 +118,8 @@ public class MetodoLongoView extends ViewPart {
 
 	// create the columns for the table
 	private void createColumns(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "Code", "Approaches", "Class", "Method", "Initial Line", "LOC", "CC", "Efferent", "NOP", "Type"};
-		int[] bounds = { 50, 70, 250, 100, 50, 50, 50, 50, 50, 300 };
+		String[] titles = { "Code", "Approaches", "Class", "#Methods", "Method",  "LOC", "CC", "Efferent", "NOP", "Type"};
+		int[] bounds = { 50, 80, 250, 70, 150, 50, 50, 50, 50, 300 };
 
 		TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
@@ -153,18 +153,20 @@ public class MetodoLongoView extends ViewPart {
 			@Override
 			public String getText(Object element) {
 				DadosMetodoSmell p = (DadosMetodoSmell) element;
-				return p.getNomeMetodo();
+				return p.getTotalMetodosClasse()+"";
 			}
 		});
-
+			
 		col = createTableViewerColumn(titles[4], bounds[4], 4);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
 				DadosMetodoSmell p = (DadosMetodoSmell) element;
-				return p.getLinhaInicial()+"";
+				return p.getNomeMetodo();
 			}
 		});
+
+		
 
 		col = createTableViewerColumn(titles[5], bounds[5], 5);
 		col.setLabelProvider(new ColumnLabelProvider() {
