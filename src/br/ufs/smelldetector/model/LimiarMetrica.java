@@ -7,7 +7,7 @@ public class LimiarMetrica {
 	public static final String CC = "CC";
 	public static final String Efferent = "Efferent";
 	public static final String NOP = "NOP";
-	public static final String DESIGN_ROLE_UNDEFINED = "Undefined";
+	public static final String DESIGN_ROLE_UNDEFINED = "UNDEFINED";
 	
 	private String metrica;
 	private String designRole;

@@ -14,6 +14,8 @@ import br.ufs.smelldetector.model.LimiarTecnica;
 
 public class FiltrarMetodosSmell {
 
+	static final String TECNICA_ANICHE = "X";
+	
 	public static HashMap<String, DadosMetodoSmell> filtrar(ArrayList<CKNumber> classesAnalisar,
 			List<LimiarTecnica> listaTecnicas, HashMap<String, DadosMetodoSmell> metodosSmell) {
 		if (metodosSmell == null)
@@ -21,22 +23,24 @@ public class FiltrarMetodosSmell {
 
 		for (CKNumber classe : classesAnalisar) {
 			for (LimiarTecnica limiarTecnica : listaTecnicas) {
-
+				
+				boolean consideraArchitecturalRoles = limiarTecnica.getTecnica().equals(TECNICA_ANICHE) ?true:false;
+				
 				HashMap<String, LimiarMetrica> mapLimiarMetrica = limiarTecnica.getMetricas();
-				LimiarMetrica limiarLOC = mapLimiarMetrica.get(LimiarMetrica.LOC + classe.getDesignRole());
-				if (limiarLOC == null)
+				LimiarMetrica limiarLOC = mapLimiarMetrica.get(LimiarMetrica.LOC + classe.getDesignRole().toUpperCase());
+				if ((consideraArchitecturalRoles && !classe.isArchitecturalRole()) || (limiarLOC == null))
 					limiarLOC = mapLimiarMetrica.get(LimiarMetrica.LOC + LimiarMetrica.DESIGN_ROLE_UNDEFINED);
 
-				LimiarMetrica limiarCC = mapLimiarMetrica.get(LimiarMetrica.CC + classe.getDesignRole());
-				if (limiarCC == null)
+				LimiarMetrica limiarCC = mapLimiarMetrica.get(LimiarMetrica.CC + classe.getDesignRole().toUpperCase());
+				if ((consideraArchitecturalRoles && !classe.isArchitecturalRole()) || (limiarCC == null))
 					limiarCC = mapLimiarMetrica.get(LimiarMetrica.CC + LimiarMetrica.DESIGN_ROLE_UNDEFINED);
 
-				LimiarMetrica limiarEfferent = mapLimiarMetrica.get(LimiarMetrica.Efferent + classe.getDesignRole());
-				if (limiarEfferent == null)
+				LimiarMetrica limiarEfferent = mapLimiarMetrica.get(LimiarMetrica.Efferent + classe.getDesignRole().toUpperCase());
+				if ((consideraArchitecturalRoles && !classe.isArchitecturalRole()) || (limiarEfferent == null))
 					limiarEfferent = mapLimiarMetrica.get(LimiarMetrica.Efferent + LimiarMetrica.DESIGN_ROLE_UNDEFINED);
 
-				LimiarMetrica limiarNOP = mapLimiarMetrica.get(LimiarMetrica.NOP + classe.getDesignRole());
-				if (limiarNOP == null)
+				LimiarMetrica limiarNOP = mapLimiarMetrica.get(LimiarMetrica.NOP + classe.getDesignRole().toUpperCase());
+				if ((consideraArchitecturalRoles && !classe.isArchitecturalRole()) || (limiarNOP == null))
 					limiarNOP = mapLimiarMetrica.get(LimiarMetrica.NOP + LimiarMetrica.DESIGN_ROLE_UNDEFINED);
 
 				for (MethodData metodo : classe.getMetricsByMethod().keySet()) {

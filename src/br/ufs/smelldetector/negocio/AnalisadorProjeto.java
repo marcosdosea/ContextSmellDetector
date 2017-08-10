@@ -34,17 +34,13 @@ public class AnalisadorProjeto {
 		ArrayList<CKNumber> listaClasses = new ArrayList<>();
 		for (String path : projetos) {
 			CKReport report = new CK().calculate(path);
-			gravarDesignRoles(report, path);
 			listaClasses.addAll(report.all());
 		}
 		
 		return listaClasses;
 	}
 
-	private static void gravarDesignRoles(CKReport report, String path) {
-		ArrayList<CKNumber> classes = new ArrayList<>(report.all());
-		
-	}
+	
 
 	public static void refreshAll() {
 		GerenciadorProjeto.validaProjetosAtivos(Activator.projetos);
