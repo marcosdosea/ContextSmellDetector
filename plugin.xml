@@ -115,7 +115,7 @@
   	<!--define the decorator -->
 	<extension point="org.eclipse.ui.decorators">
 		<decorator
-		    id="br.ufs.smelldetector.filedecorator"
+		    id="br.ufs.smelldetector.marker.fileDecorator"
 		    label="MyMarker Decorator"
 		    state="true"
 		    quadrant = "BOTTOM_RIGHT"
