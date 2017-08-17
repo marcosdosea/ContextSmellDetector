@@ -27,8 +27,8 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ViewPart;
 
+import br.ufba.smelldetector.model.DadosMetodoSmell;
 import br.ufs.smelldetector.marker.MarkerFactory;
-import br.ufs.smelldetector.model.DadosMetodoSmell;
 import br.ufs.smelldetector.model.ProviderModel;
 
 public class MetodoLongoView extends ViewPart {

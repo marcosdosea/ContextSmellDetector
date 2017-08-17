@@ -2,9 +2,10 @@ package br.ufs.smelldetector.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 
 import com.github.mauricioaniche.ck.CKNumber;
+
+import br.ufba.smelldetector.model.DadosMetodoSmell;
 
 public enum ProviderModel {
 
@@ -13,7 +14,6 @@ public enum ProviderModel {
 	public ArrayList<CKNumber> dadosClasses;
 	public HashMap<String, DadosMetodoSmell> metodosSmell;
 	private ArrayList<String> interfacesAPI;
-	public LinkedList<DadosComponentesArquiteturais> dadosComponentesArquiteturais;
 	public int valorLimiarGlobal;
 	public int medianaGlobal;
 

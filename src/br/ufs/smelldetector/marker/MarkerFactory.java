@@ -22,8 +22,8 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.SimpleMarkerAnnotation;
 
+import br.ufba.smelldetector.model.DadosMetodoSmell;
 import br.ufs.smelldetector.Activator;
-import br.ufs.smelldetector.model.DadosMetodoSmell;
 import br.ufs.smelldetector.negocio.GerenciadorProjeto;
 
 public class MarkerFactory {

@@ -13,10 +13,12 @@ import com.github.mauricioaniche.ck.CK;
 import com.github.mauricioaniche.ck.CKNumber;
 import com.github.mauricioaniche.ck.CKReport;
 
+import br.ufba.smelldetector.model.DadosMetodoSmell;
+import br.ufba.smelldetector.model.LimiarTecnica;
+import br.ufba.smelldetector.negocio.CarregaSalvaArquivo;
+import br.ufba.smelldetector.negocio.FiltrarMetodosSmell;
 import br.ufs.smelldetector.Activator;
 import br.ufs.smelldetector.marker.MarkerFactory;
-import br.ufs.smelldetector.model.DadosMetodoSmell;
-import br.ufs.smelldetector.model.LimiarTecnica;
 import br.ufs.smelldetector.model.ProviderModel;
 import br.ufs.smelldetector.views.MetodoLongoView;
 

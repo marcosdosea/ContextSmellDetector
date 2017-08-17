@@ -11,8 +11,10 @@ import org.junit.Test;
 
 import com.github.mauricioaniche.ck.CKNumber;
 
-import br.ufs.smelldetector.model.DadosMetodoSmell;
-import br.ufs.smelldetector.model.LimiarTecnica;
+import br.ufba.smelldetector.model.DadosMetodoSmell;
+import br.ufba.smelldetector.model.LimiarTecnica;
+import br.ufba.smelldetector.negocio.CarregaSalvaArquivo;
+import br.ufba.smelldetector.negocio.FiltrarMetodosSmell;
 
 public class FiltrarMetodosSmellTest {
 

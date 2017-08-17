@@ -4,7 +4,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.swt.SWT;
 
-import br.ufs.smelldetector.model.DadosMetodoSmell;
+import br.ufba.smelldetector.model.DadosMetodoSmell;
 
 public class MetodoLongoComparator extends ViewerComparator {
 	private int propertyIndex;

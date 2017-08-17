@@ -9,8 +9,8 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import br.ufba.smelldetector.negocio.CarregaSalvaArquivo;
 import br.ufs.smelldetector.negocio.AnalisadorProjeto;
-import br.ufs.smelldetector.negocio.CarregaSalvaArquivo;
 import br.ufs.smelldetector.reports.ResourceChangeReporter;
 
 /**
