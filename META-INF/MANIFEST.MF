@@ -21,7 +21,8 @@ Import-Package: org.eclipse.jface.text,
 Bundle-ClassPath: lib/designroleminer.jar,
  .,
  lib/google-collections-1.0.jar,
- lib/junit.jar
+ lib/junit.jar,
+ lib/metricminer.jar
 Export-Package: br.ufba.designroleminer;
   uses:="br.com.metricminer2.scm,
    br.com.metricminer2,

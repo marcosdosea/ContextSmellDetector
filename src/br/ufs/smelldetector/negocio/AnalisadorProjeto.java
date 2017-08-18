@@ -61,7 +61,10 @@ public class AnalisadorProjeto {
 	 */
 	private static void atulizarDadosProviderModel() {
 		ProviderModel.INSTANCE.metodosSmell = new HashMap<>();
-		List<LimiarTecnica> listaTecnicas = CarregaSalvaArquivo.carregarLimiares();
+		
+		String pasta = System.getProperty("user.dir") + "\\configuration\\br.ufs.smelldetector\\";
+		
+		List<LimiarTecnica> listaTecnicas = CarregaSalvaArquivo.carregarLimiares(System.getProperty("user.dir") + "\\configuration\\br.ufs.smelldetector\\");
 		ArrayList<CKNumber> projetosAnalisar = AnalisadorProjeto.getMetricasProjetos(Activator.projetos);
 		FiltrarMetodosSmell.filtrar(projetosAnalisar, listaTecnicas, ProviderModel.INSTANCE.metodosSmell);
 	}
