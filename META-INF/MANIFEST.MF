@@ -21,18 +21,8 @@ Import-Package: org.eclipse.jface.text,
 Bundle-ClassPath: lib/designroleminer.jar,
  .,
  lib/google-collections-1.0.jar,
- lib/junit.jar,
- lib/metricminer.jar
-Export-Package: br.ufba.designroleminer;
-  uses:="br.com.metricminer2.scm,
-   br.com.metricminer2,
-   org.eclipse.jdt.core.dom,
-   br.com.metricminer2.domain,
-   br.com.metricminer2.persistence",
- br.ufba.limiares,
- br.ufba.smelldetector.model,
- br.ufba.smelldetector.negocio,
- br.ufs.smelldetector;uses:="org.osgi.framework,org.eclipse.jface.resource,org.eclipse.ui.plugin",
+ lib/junit.jar
+Export-Package: br.ufs.smelldetector,
  br.ufs.smelldetector.marker;
   uses:="org.eclipse.ui.texteditor,
    br.ufba.smelldetector.model,

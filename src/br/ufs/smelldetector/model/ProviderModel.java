@@ -3,15 +3,14 @@ package br.ufs.smelldetector.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.github.mauricioaniche.ck.CKNumber;
-
-import br.ufba.smelldetector.model.DadosMetodoSmell;
+import org.designroleminer.MetricReport;
+import org.designroleminer.smelldetector.model.DadosMetodoSmell;
 
 public enum ProviderModel {
 
 	INSTANCE;
 
-	public ArrayList<CKNumber> dadosClasses;
+	public ArrayList<MetricReport> dadosClasses;
 	public HashMap<String, DadosMetodoSmell> metodosSmell;
 	private ArrayList<String> interfacesAPI;
 	public int valorLimiarGlobal;

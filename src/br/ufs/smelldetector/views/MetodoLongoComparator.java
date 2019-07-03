@@ -1,10 +1,9 @@
 package br.ufs.smelldetector.views;
 
+import org.designroleminer.smelldetector.model.DadosMetodoSmell;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.swt.SWT;
-
-import br.ufba.smelldetector.model.DadosMetodoSmell;
 
 public class MetodoLongoComparator extends ViewerComparator {
 	private int propertyIndex;
@@ -44,8 +43,8 @@ public class MetodoLongoComparator extends ViewerComparator {
 			if (p1.getListaTecnicas().toString().length() > p2.getListaTecnicas().toString().length())
 				rc = 1;
 			else if (p1.getListaTecnicas().toString().length() < p2.getListaTecnicas().toString().length())
-			    rc = -1;
-			else 
+				rc = -1;
+			else
 				rc = p1.getListaTecnicas().toString().compareTo(p2.getListaTecnicas().toString());
 			break;
 		case 2:
@@ -75,7 +74,7 @@ public class MetodoLongoComparator extends ViewerComparator {
 				rc = -1;
 			break;
 		case 8:
-			if (p1.getNumberOfParameters() >= p2.getNumberOfParameters() ) {
+			if (p1.getNumberOfParameters() >= p2.getNumberOfParameters()) {
 				rc = 1;
 			} else
 				rc = -1;
@@ -93,4 +92,4 @@ public class MetodoLongoComparator extends ViewerComparator {
 		return rc;
 	}
 
-} 
+}

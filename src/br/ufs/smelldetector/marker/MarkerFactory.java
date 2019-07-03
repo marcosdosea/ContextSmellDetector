@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import org.designroleminer.smelldetector.model.DadosMetodoSmell;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -22,7 +23,6 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.SimpleMarkerAnnotation;
 
-import br.ufba.smelldetector.model.DadosMetodoSmell;
 import br.ufs.smelldetector.Activator;
 import br.ufs.smelldetector.negocio.GerenciadorProjeto;
 

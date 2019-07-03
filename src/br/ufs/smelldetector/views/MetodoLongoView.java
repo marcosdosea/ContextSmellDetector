@@ -1,5 +1,6 @@
 package br.ufs.smelldetector.views;
 
+import org.designroleminer.smelldetector.model.DadosMetodoSmell;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -27,7 +28,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ViewPart;
 
-import br.ufba.smelldetector.model.DadosMetodoSmell;
 import br.ufs.smelldetector.marker.MarkerFactory;
 import br.ufs.smelldetector.model.ProviderModel;
 

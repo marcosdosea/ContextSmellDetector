@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.designroleminer.ClassMetricResult;
+import org.designroleminer.MetricReport;
+import org.designroleminer.smelldetector.CarregaSalvaArquivo;
+import org.designroleminer.smelldetector.FilterSmells;
+import org.designroleminer.smelldetector.model.DadosMetodoSmell;
+import org.designroleminer.smelldetector.model.LimiarTecnica;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import com.github.mauricioaniche.ck.CK;
-import com.github.mauricioaniche.ck.CKNumber;
-import com.github.mauricioaniche.ck.CKReport;
 
-import br.ufba.smelldetector.model.DadosMetodoSmell;
-import br.ufba.smelldetector.model.LimiarTecnica;
-import br.ufba.smelldetector.negocio.CarregaSalvaArquivo;
-import br.ufba.smelldetector.negocio.FiltrarMetodosSmell;
 import br.ufs.smelldetector.Activator;
 import br.ufs.smelldetector.marker.MarkerFactory;
 import br.ufs.smelldetector.model.ProviderModel;
@@ -32,17 +32,15 @@ public class AnalisadorProjeto {
 	 * @param AdicionarArquitetura
 	 * @return
 	 */
-	public static ArrayList<CKNumber> getMetricasProjetos(ArrayList<String> projetos) {
-		ArrayList<CKNumber> listaClasses = new ArrayList<>();
+	public static ArrayList<ClassMetricResult> getMetricasProjetos(ArrayList<String> projetos) {
+		ArrayList<ClassMetricResult> listaClasses = new ArrayList<>();
 		for (String path : projetos) {
-			CKReport report = new CK().calculate(path);
+			MetricReport report = new CK().calculate(path);
 			listaClasses.addAll(report.all());
 		}
-		
+
 		return listaClasses;
 	}
-
-	
 
 	public static void refreshAll() {
 		GerenciadorProjeto.validaProjetosAtivos(Activator.projetos);
@@ -61,12 +59,13 @@ public class AnalisadorProjeto {
 	 */
 	private static void atulizarDadosProviderModel() {
 		ProviderModel.INSTANCE.metodosSmell = new HashMap<>();
-		
+
 		String pasta = System.getProperty("user.dir") + "\\configuration\\br.ufs.smelldetector\\";
-		
-		List<LimiarTecnica> listaTecnicas = CarregaSalvaArquivo.carregarLimiares(System.getProperty("user.dir") + "\\configuration\\br.ufs.smelldetector\\");
-		ArrayList<CKNumber> projetosAnalisar = AnalisadorProjeto.getMetricasProjetos(Activator.projetos);
-		FiltrarMetodosSmell.filtrar(projetosAnalisar, listaTecnicas, ProviderModel.INSTANCE.metodosSmell);
+
+		List<LimiarTecnica> listaTecnicas = CarregaSalvaArquivo
+				.carregarLimiares(System.getProperty("user.dir") + "\\configuration\\br.ufs.smelldetector\\");
+		ArrayList<ClassMetricResult> projetosAnalisar = AnalisadorProjeto.getMetricasProjetos(Activator.projetos);
+		FilterSmells.filtrar(projetosAnalisar, listaTecnicas, ProviderModel.INSTANCE.metodosSmell);
 	}
 
 	public static void refreshMarcadores(HashMap<String, DadosMetodoSmell> metodosSmell) {

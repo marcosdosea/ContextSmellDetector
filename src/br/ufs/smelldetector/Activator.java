@@ -2,6 +2,7 @@ package br.ufs.smelldetector;
 
 import java.util.ArrayList;
 
+import org.designroleminer.smelldetector.CarregaSalvaArquivo;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -9,7 +10,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import br.ufba.smelldetector.negocio.CarregaSalvaArquivo;
 import br.ufs.smelldetector.negocio.AnalisadorProjeto;
 import br.ufs.smelldetector.reports.ResourceChangeReporter;
 
